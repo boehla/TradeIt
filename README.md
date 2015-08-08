@@ -12,4 +12,4 @@ HowTo:
    Not tested, pls report me ;)
 
 Coming Soon:
-* 
+* -
