@@ -71,7 +71,7 @@ namespace Main {
             foreach (CandleInterval item in Enum.GetValues(typeof(CandleInterval))) {
                 cbCandleIntervall.Items.Add(item);
             }
-            
+            LoadSettings();
         }
 
         private void LoadSettings() {
