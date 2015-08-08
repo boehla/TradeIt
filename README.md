@@ -4,7 +4,8 @@ TODO:
 * Backtesting with simulating Portfolio
 * Some btc's are still in the code
 * Make something like a Data import class, for easily adding new methods 
-* 
+* Options Datagrid -> easy to add new options
+* Trader current Info String
 
 HowTo:
 * http://stackoverflow.com/questions/18362361/visual-studio-how-to-create-project-from-existing-github-repository
@@ -12,4 +13,4 @@ HowTo:
    Not tested, pls report me ;)
 
 Coming Soon:
-* A example Trading & Api Lib
+* -
