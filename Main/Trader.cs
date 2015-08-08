@@ -86,10 +86,16 @@ namespace Main {
         public void sellBtc(decimal vol) {
             this.writeLog(string.Format("SELL {2} btc: {0}@{1}", vol, Data.Candle().value.Last, live? "live" : "simualte" ));
             plotPoint("sell", CurDate, Data.Candle().value.Last, Color.Red);
+            if (live) {
+                _api.sell(vol);
+            }
         }
         public void buyBtc(decimal vol) {
             this.writeLog(string.Format("BUY {2} btc: {0}@{1}", vol, Data.Candle().value.Last, live ? "live" : "simualte"));
             plotPoint("buy", CurDate, Data.Candle().value.Last, Color.Green);
+            if (live) {
+                _api.buy(vol);
+            }
         }
         public void log(string text) {
             this.writeLog("TRADING: " + text);

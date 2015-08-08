@@ -48,8 +48,12 @@ namespace Main {
             rtb.SelectionColor = col;
             rtb.SelectionLength = 0;
 
-            rtb.SelectionStart = rtb.Text.Length;
-            rtb.ScrollToCaret();
+
+            if (this.Visible) {
+                rtb.ScrollToCaret();
+                rtb.SelectionStart = rtb.Text.Length;
+            }
+            
         }
 
         private void DebugForm_FormClosing(object sender, FormClosingEventArgs e) {

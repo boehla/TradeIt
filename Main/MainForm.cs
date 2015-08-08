@@ -50,6 +50,12 @@ namespace Main {
 
             //tr = loadTraderFromDll(Settings.getString(SettKeys.TRADER_DLL_FILE));
             //if (tr != null) tr.Initiale();
+
+            cbCandleIntervall.Items.Clear();
+            foreach (CandleInterval item in Enum.GetValues(typeof(CandleInterval))) {
+                cbCandleIntervall.Items.Add(item);
+            }
+
             LoadSettings();
 
             cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
@@ -63,16 +69,14 @@ namespace Main {
             //    MessageBox.Show("Test Failed, Please check CandelListClass!!!!!");
             //    this.Close();
             //}
-            cbCandleIntervall.Items.Clear();
-            foreach (CandleInterval item in Enum.GetValues(typeof(CandleInterval))) {
-                cbCandleIntervall.Items.Add(item);
-            }
+
             
         }
 
         private void LoadSettings() {
             cbCandleIntervall.SelectedItem = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
             candleInter = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
+            if (candleInter <= 0) candleInter = CandleInterval._1h;
             nudMaxChartPoints.Value = Settings.getInt(SettKeys.MAX_CHART_POINTS);
             tbApiDllPath.Text = Settings.getString(SettKeys.API_DLL_FILE);
             tbTraderDllFilename.Text = Settings.getString(SettKeys.TRADER_DLL_FILE);
