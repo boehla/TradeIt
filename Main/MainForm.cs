@@ -71,7 +71,14 @@ namespace Main {
             foreach (CandleInterval item in Enum.GetValues(typeof(CandleInterval))) {
                 cbCandleIntervall.Items.Add(item);
             }
-            cbCandleIntervall.SelectedItem = candleInter;
+            
+        }
+
+        private void LoadSettings() {
+            cbCandleIntervall.SelectedItem = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
+            nudMaxChartPoints.Value = Settings.getInt(SettKeys.MAX_CHART_POINTS);
+            tbApiDllPath.Text = Settings.getString(SettKeys.API_DLL_FILE);
+            tbTraderDllFilename.Text = Settings.getString(SettKeys.TRADER_DLL_FILE);
         }
 
         private void bMainShowDebug_Click(object sender, EventArgs e) {
@@ -366,10 +373,16 @@ namespace Main {
             candleInter = newintervall;
             if (tr != null) tr.init(kh, candleInter, cm);
             cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
+            Settings.set(SettKeys.CANDLE_INTERVALL, (int)candleInter);
         }
 
         private void cbCandleIntervall_SelectedIndexChanged(object sender, EventArgs e) {
             changeCandleIntervall((CandleInterval)cbCandleIntervall.SelectedItem);
+        }
+
+        private void nudMaxChartPoints_ValueChanged(object sender, EventArgs e) {
+            if (tr != null) tr.MaxChartPoints = (int)nudMaxChartPoints.Value;
+            Settings.set(SettKeys.MAX_CHART_POINTS, tr.MaxChartPoints);
         }
     }
 }

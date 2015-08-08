@@ -85,6 +85,9 @@
             this.resetDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nudMaxChartPoints = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -106,6 +109,8 @@
             this.groupBox7.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).BeginInit();
             this.SuspendLayout();
             // 
             // bMainShowDebug
@@ -554,6 +559,7 @@
             // 
             // tabSettings
             // 
+            this.tabSettings.Controls.Add(this.groupBox8);
             this.tabSettings.Controls.Add(this.groupBox7);
             this.tabSettings.Location = new System.Drawing.Point(4, 22);
             this.tabSettings.Name = "tabSettings";
@@ -676,6 +682,49 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.nudMaxChartPoints);
+            this.groupBox8.Controls.Add(this.label10);
+            this.groupBox8.Location = new System.Drawing.Point(6, 77);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(280, 140);
+            this.groupBox8.TabIndex = 1;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Candle Intervall";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 27);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Max Chart Points";
+            // 
+            // nudMaxChartPoints
+            // 
+            this.nudMaxChartPoints.Location = new System.Drawing.Point(99, 25);
+            this.nudMaxChartPoints.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nudMaxChartPoints.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudMaxChartPoints.Name = "nudMaxChartPoints";
+            this.nudMaxChartPoints.Size = new System.Drawing.Size(69, 20);
+            this.nudMaxChartPoints.TabIndex = 1;
+            this.nudMaxChartPoints.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nudMaxChartPoints.ValueChanged += new System.EventHandler(this.nudMaxChartPoints_ValueChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -720,6 +769,9 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -785,6 +837,9 @@
         private System.Windows.Forms.TabPage tabSettings;
         private System.Windows.Forms.ComboBox cbCandleIntervall;
         private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.NumericUpDown nudMaxChartPoints;
+        private System.Windows.Forms.Label label10;
     }
 }
 

@@ -17,6 +17,7 @@ namespace Main {
         private int tickcount = 0;
         private bool live = false;
         private ApiPortfolio _startPortfolio = null;
+        private int maxChartPoints = 300;
 
         public DateTime CurDate {
             get {
@@ -26,6 +27,10 @@ namespace Main {
                 }
                 return dt;
             }
+        }
+        public int MaxChartPoints {
+            get { return maxChartPoints; }
+            set { maxChartPoints = value; }
         }
         public virtual string Version {
             get { return "ND"; }
@@ -149,7 +154,7 @@ namespace Main {
         }
         private void checkSerMaxPoints() {
             foreach (Series ser in MainForm.chartcont.Series) {
-                DateTime maxDate = Data.Candle().dt - new TimeSpan(0, 0, Lib.Const.MAX_CHART_POINTS * (int)_ci);
+                DateTime maxDate = Data.Candle().dt - new TimeSpan(0, 0, maxChartPoints * (int)_ci);
                 while (ser.Points.Count > 0) {
                     if (ser.Points[0].XValue < maxDate.ToOADate()) {
                         ser.Points.RemoveAt(0);
