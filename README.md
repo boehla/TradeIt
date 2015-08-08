@@ -1,0 +1,4 @@
+# TradeIt
+
+TODO:
+o ...
