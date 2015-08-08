@@ -24,6 +24,9 @@ namespace Main.Api {
         public virtual String Name {
             get { return "ND"; }
         }
+        public virtual String Version {
+            get { return "ND"; }
+        }
         public virtual ApiTicker getTicker(string pair) {
             List<ApiTicker> ret = getTicker(new List<string>() { pair });
             if (ret.Count > 0) return ret[0];

@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.bMainShowDebug = new System.Windows.Forms.Button();
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -70,11 +70,14 @@
             this.tbApiDllPath = new System.Windows.Forms.TextBox();
             this.bApiLoad = new System.Windows.Forms.Button();
             this.tabSettings = new System.Windows.Forms.TabPage();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.nudMaxChartPoints = new System.Windows.Forms.NumericUpDown();
+            this.label10 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.cbCandleIntervall = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssTraderInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tssApiInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,11 +86,10 @@
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.resetDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showDebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.nudMaxChartPoints = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -106,11 +108,11 @@
             this.tabApi.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabSettings.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).BeginInit();
             this.groupBox7.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).BeginInit();
             this.SuspendLayout();
             // 
             // bMainShowDebug
@@ -183,17 +185,17 @@
             // 
             // chartControl
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartControl.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.chartControl.ChartAreas.Add(chartArea2);
             this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartControl.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.chartControl.Legends.Add(legend2);
             this.chartControl.Location = new System.Drawing.Point(3, 3);
             this.chartControl.Name = "chartControl";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartControl.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartControl.Series.Add(series2);
             this.chartControl.Size = new System.Drawing.Size(667, 419);
             this.chartControl.TabIndex = 0;
             this.chartControl.Text = "chart1";
@@ -270,7 +272,6 @@
             this.tbTraderDllFilename.Name = "tbTraderDllFilename";
             this.tbTraderDllFilename.Size = new System.Drawing.Size(441, 20);
             this.tbTraderDllFilename.TabIndex = 3;
-            this.tbTraderDllFilename.TextChanged += new System.EventHandler(this.tbTraderDllFilename_TextChanged);
             this.tbTraderDllFilename.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FilenameTextBoxMouseDoubleClick);
             // 
             // bReloadTrader
@@ -569,6 +570,49 @@
             this.tabSettings.Text = "Settings";
             this.tabSettings.UseVisualStyleBackColor = true;
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.nudMaxChartPoints);
+            this.groupBox8.Controls.Add(this.label10);
+            this.groupBox8.Location = new System.Drawing.Point(6, 77);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(280, 140);
+            this.groupBox8.TabIndex = 1;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Candle Intervall";
+            // 
+            // nudMaxChartPoints
+            // 
+            this.nudMaxChartPoints.Location = new System.Drawing.Point(99, 25);
+            this.nudMaxChartPoints.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.nudMaxChartPoints.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudMaxChartPoints.Name = "nudMaxChartPoints";
+            this.nudMaxChartPoints.Size = new System.Drawing.Size(69, 20);
+            this.nudMaxChartPoints.TabIndex = 1;
+            this.nudMaxChartPoints.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.nudMaxChartPoints.ValueChanged += new System.EventHandler(this.nudMaxChartPoints_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 27);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 13);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "Max Chart Points";
+            // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.cbCandleIntervall);
@@ -596,7 +640,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tssTraderInfo,
-            this.toolStripStatusLabel1});
+            this.tssApiInfo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 481);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(705, 22);
@@ -606,19 +650,20 @@
             // tssTraderInfo
             // 
             this.tssTraderInfo.Name = "tssTraderInfo";
-            this.tssTraderInfo.Size = new System.Drawing.Size(118, 17);
-            this.tssTraderInfo.Text = "toolStripStatusLabel1";
+            this.tssTraderInfo.Size = new System.Drawing.Size(61, 17);
+            this.tssTraderInfo.Text = "TraderInfo";
             // 
-            // toolStripStatusLabel1
+            // tssApiInfo
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.tssApiInfo.Name = "tssApiInfo";
+            this.tssApiInfo.Size = new System.Drawing.Size(46, 17);
+            this.tssApiInfo.Text = "ApiInfo";
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.showDebugToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(705, 24);
@@ -678,52 +723,24 @@
             this.resetDatabaseToolStripMenuItem.Text = "Reset Database";
             this.resetDatabaseToolStripMenuItem.Click += new System.EventHandler(this.resetDatabaseToolStripMenuItem_Click);
             // 
+            // showDebugToolStripMenuItem
+            // 
+            this.showDebugToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem});
+            this.showDebugToolStripMenuItem.Name = "showDebugToolStripMenuItem";
+            this.showDebugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
+            this.showDebugToolStripMenuItem.Text = "Debug";
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.showToolStripMenuItem.Text = "Show";
+            this.showToolStripMenuItem.Click += new System.EventHandler(this.bMainShowDebug_Click);
+            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.nudMaxChartPoints);
-            this.groupBox8.Controls.Add(this.label10);
-            this.groupBox8.Location = new System.Drawing.Point(6, 77);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(280, 140);
-            this.groupBox8.TabIndex = 1;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Candle Intervall";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(6, 27);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Max Chart Points";
-            // 
-            // nudMaxChartPoints
-            // 
-            this.nudMaxChartPoints.Location = new System.Drawing.Point(99, 25);
-            this.nudMaxChartPoints.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.nudMaxChartPoints.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.nudMaxChartPoints.Name = "nudMaxChartPoints";
-            this.nudMaxChartPoints.Size = new System.Drawing.Size(69, 20);
-            this.nudMaxChartPoints.TabIndex = 1;
-            this.nudMaxChartPoints.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.nudMaxChartPoints.ValueChanged += new System.EventHandler(this.nudMaxChartPoints_ValueChanged);
             // 
             // MainForm
             // 
@@ -764,14 +781,14 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.tabSettings.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -826,7 +843,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lHelpMemoryUsed;
         private System.Windows.Forms.Label lChartPosition;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tssApiInfo;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.DataGridView dgvTradeHistory;
         private System.Windows.Forms.TabPage tabApi;
@@ -840,6 +857,8 @@
         private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.NumericUpDown nudMaxChartPoints;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolStripMenuItem showDebugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
     }
 }
 

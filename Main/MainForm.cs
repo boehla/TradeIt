@@ -41,23 +41,19 @@ namespace Main {
             lHelpVersion.Text = MAINVERSION;
 
             typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic |BindingFlags.Instance | BindingFlags.SetProperty, null,dgvTradeHistory, new object[] { true });
-
-
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
-
-
             cm.generateNew();
             //cm.generateNew();
             //cm.loadFromFile("data\\backup.data");
 
-            tr = loadTraderFromDll(Settings.getString(SettKeys.TRADER_DLL_FILE));
-            if (tr != null) tr.Initiale();
-
+            //tr = loadTraderFromDll(Settings.getString(SettKeys.TRADER_DLL_FILE));
+            //if (tr != null) tr.Initiale();
+            LoadSettings();
 
             cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
-            cm.loadFromFile(@"data\backup.data", true);
+            //cm.loadFromFile(@"data\backup.data", true);
 
             //cm.loadFromBitcoinAvarage(@"C:\New folder\bitavaM.csv", true);
             //cm.loadFromFile(@"C:\New folder\backup.data", true);
@@ -71,11 +67,12 @@ namespace Main {
             foreach (CandleInterval item in Enum.GetValues(typeof(CandleInterval))) {
                 cbCandleIntervall.Items.Add(item);
             }
-            LoadSettings();
+            
         }
 
         private void LoadSettings() {
             cbCandleIntervall.SelectedItem = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
+            candleInter = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
             nudMaxChartPoints.Value = Settings.getInt(SettKeys.MAX_CHART_POINTS);
             tbApiDllPath.Text = Settings.getString(SettKeys.API_DLL_FILE);
             tbTraderDllFilename.Text = Settings.getString(SettKeys.TRADER_DLL_FILE);
@@ -120,9 +117,10 @@ namespace Main {
                 }
                 if (Settings.HasChange) Settings.save();
                 refreshMemoryStats();
-                timercounter++;
             } catch (Exception ex) {
                 Logging.logException("Failed at Timercounter: " + timercounter, ex);
+            } finally {
+                timercounter++;
             }
         }
 
@@ -135,12 +133,14 @@ namespace Main {
             }
         }
 
+        #region pluginHandling (api & trader)
         private Trader loadTraderFromDll(string path) {
             try {
                 if (!File.Exists(path)) {
                     Logging.log("FileNotFound: " + path, LogPrior.Warning);
                     return null;
                 }
+                Settings.set(SettKeys.TRADER_DLL_FILE, tbTraderDllFilename.Text);
                 Trader ret = null;
                 Assembly assembly = Assembly.Load(System.IO.File.ReadAllBytes(path));
 
@@ -177,7 +177,7 @@ namespace Main {
                     if (type.BaseType.Name == "ApiHelp") {
                         ret = (ApiHelp)Activator.CreateInstance(type);
                         ret.init();
-                        MessageBox.Show(ret.Name);
+                        tssApiInfo.Text = ret.Name;
                         return ret;
 
                     }
@@ -189,12 +189,6 @@ namespace Main {
             }
             return null;
         }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            cm.saveToFile(Settings.getString(SettKeys.DATA_FILE));
-            Settings.save();
-        }
-
         private void bReloadTrader_Click(object sender, EventArgs e) {
             chartControl.Series.Clear();
 
@@ -204,8 +198,16 @@ namespace Main {
 
             cm.generateNew();
             cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
-            cm.loadFromFile(@"data\backup.data", false);
+            //cm.loadFromFile(@"data\backup.data", false);
         }
+        #endregion
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            cm.saveToFile(Settings.getString(SettKeys.DATA_FILE));
+            Settings.save();
+        }
+
+
 
         private void refreshPortfolio() {
             lCurPortoBTC.Text = kh.Portfolio.btc.ToString("0.########");
@@ -254,10 +256,6 @@ namespace Main {
             }
         }
 
-        private void tbTraderDllFilename_TextChanged(object sender, EventArgs e) {
-            Settings.set(SettKeys.TRADER_DLL_FILE, tbTraderDllFilename.Text);
-        }
-
         private void tradeItFileToolStripMenuItem_Click(object sender, EventArgs e) {
             string initFolderId = "FILEDIALOG_INIT_DATAFILE";
             if (Settings.getString(initFolderId).Length > 0) openFileDialog.InitialDirectory = Settings.getString(initFolderId);
@@ -298,6 +296,7 @@ namespace Main {
             }
         }
 
+        #region proginfo
         private DateTime RetrieveLinkerTimestamp() {
             string filePath = System.Reflection.Assembly.GetCallingAssembly().Location;
             const int c_PeHeaderOffset = 60;
@@ -328,6 +327,7 @@ namespace Main {
             memory = thisproc.PrivateMemorySize64;
             lHelpMemoryUsed.Text = Lib.Tools.formatSpace(memory);
         }
+        #endregion
 
         private void FilenameTextBoxMouseDoubleClick(object sender, MouseEventArgs e) {
             if (sender is TextBox) {
@@ -361,7 +361,7 @@ namespace Main {
         }
 
         private void bApiLoad_Click(object sender, EventArgs e) {
-            chartControl.Series.Clear();
+            Settings.set(SettKeys.API_DLL_FILE, tbApiDllPath.Text);
 
             kh = loadApiFromDll(tbApiDllPath.Text);
         }
@@ -381,8 +381,10 @@ namespace Main {
         }
 
         private void nudMaxChartPoints_ValueChanged(object sender, EventArgs e) {
-            if (tr != null) tr.MaxChartPoints = (int)nudMaxChartPoints.Value;
-            Settings.set(SettKeys.MAX_CHART_POINTS, tr.MaxChartPoints);
+            if (tr != null) {
+                tr.MaxChartPoints = (int)nudMaxChartPoints.Value;
+                Settings.set(SettKeys.MAX_CHART_POINTS, tr.MaxChartPoints);
+            }
         }
     }
 }

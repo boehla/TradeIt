@@ -37,6 +37,9 @@ namespace Main {
             if (dt < Lib.Const.NULL_DATE) {
                 Logging.log("Skip addToAllNewTicker because Date < NULL_DATE", LogPrior.Warning);
                 return;
+            } else if (!tick.CorrectData) {
+                Logging.log("Skip tick because correctData is not set true! " + tick.ToString(), LogPrior.Warning);
+                return;
             }
             Logging.log("AddTickToAll: bid=" + tick.Bid + " ask=" + tick.Ask, LogPrior.Debug);
             foreach (KeyValuePair<int, CandleList> entry in candllist) {

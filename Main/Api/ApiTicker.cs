@@ -16,6 +16,7 @@ namespace Main.Api {
         public int NumberOfTrades { get; set; }
         public double Low { get; set; }
         public double High { get; set; }
+        public bool CorrectData { get; set; }
 
         private int _countMerged;
         public int CountMerged {
@@ -33,6 +34,7 @@ namespace Main.Api {
             Low = -1;
             High = -1;
             _countMerged = 1;
+            CorrectData = false;
         }
 
         public override string ToString() {
