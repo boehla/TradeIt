@@ -88,13 +88,19 @@
       <Name>Lib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="dlls\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="dlls\Jayrock.dll" />
+    <Content Include="dlls\Jayrock.Json.dll" />
+    <Content Include="dlls\Jayrock.Json.pdb" />
+    <Content Include="dlls\Jayrock.pdb" />
+    <Content Include="dlls\Jayrock.Sandbox.dll" />
+    <Content Include="dlls\Jayrock.Sandbox.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
