@@ -41,6 +41,7 @@ namespace Main {
         }
         public CandleInterval UpdateIntervall {
             get { return _ci; }
+            set { _ci = value; }
         }
         public int TickCount {
             get { return tickcount; }

@@ -40,9 +40,9 @@ namespace Main {
             lHelpCompileDate.Text = RetrieveLinkerTimestamp().ToString(Lib.Const.DATE_TIME_FORMAT);
             lHelpVersion.Text = MAINVERSION;
 
-            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic |
-BindingFlags.Instance | BindingFlags.SetProperty, null,
-dgvTradeHistory, new object[] { true });
+            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic |BindingFlags.Instance | BindingFlags.SetProperty, null,dgvTradeHistory, new object[] { true });
+
+
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
@@ -67,6 +67,11 @@ dgvTradeHistory, new object[] { true });
             //    MessageBox.Show("Test Failed, Please check CandelListClass!!!!!");
             //    this.Close();
             //}
+            cbCandleIntervall.Items.Clear();
+            foreach (CandleInterval item in Enum.GetValues(typeof(CandleInterval))) {
+                cbCandleIntervall.Items.Add(item);
+            }
+            cbCandleIntervall.SelectedItem = candleInter;
         }
 
         private void bMainShowDebug_Click(object sender, EventArgs e) {
@@ -352,6 +357,19 @@ dgvTradeHistory, new object[] { true });
             chartControl.Series.Clear();
 
             kh = loadApiFromDll(tbApiDllPath.Text);
+        }
+
+
+        private void changeCandleIntervall(CandleInterval newintervall) {
+            if (newintervall == candleInter) return;
+            cm.CandleList[(int)candleInter].OnNewCandle -= new NewCandleEventHandler(OnNewCandleReceived);
+            candleInter = newintervall;
+            if (tr != null) tr.init(kh, candleInter, cm);
+            cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
+        }
+
+        private void cbCandleIntervall_SelectedIndexChanged(object sender, EventArgs e) {
+            changeCandleIntervall((CandleInterval)cbCandleIntervall.SelectedItem);
         }
     }
 }

@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.bMainShowDebug = new System.Windows.Forms.Button();
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -69,6 +69,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tbApiDllPath = new System.Windows.Forms.TextBox();
             this.bApiLoad = new System.Windows.Forms.Button();
+            this.tabSettings = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.cbCandleIntervall = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssTraderInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -99,13 +102,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvTradeHistory)).BeginInit();
             this.tabApi.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.tabSettings.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bMainShowDebug
             // 
-            this.bMainShowDebug.Location = new System.Drawing.Point(558, 6);
+            this.bMainShowDebug.Location = new System.Drawing.Point(6, 6);
             this.bMainShowDebug.Name = "bMainShowDebug";
             this.bMainShowDebug.Size = new System.Drawing.Size(109, 23);
             this.bMainShowDebug.TabIndex = 0;
@@ -121,8 +126,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
@@ -131,6 +136,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabApi);
+            this.tabControl1.Controls.Add(this.tabSettings);
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -145,7 +151,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(673, 425);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Debug";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -172,17 +178,17 @@
             // 
             // chartControl
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartControl.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chartControl.ChartAreas.Add(chartArea1);
             this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartControl.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chartControl.Legends.Add(legend1);
             this.chartControl.Location = new System.Drawing.Point(3, 3);
             this.chartControl.Name = "chartControl";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartControl.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartControl.Series.Add(series1);
             this.chartControl.Size = new System.Drawing.Size(667, 419);
             this.chartControl.TabIndex = 0;
             this.chartControl.Text = "chart1";
@@ -546,6 +552,40 @@
             this.bApiLoad.UseVisualStyleBackColor = true;
             this.bApiLoad.Click += new System.EventHandler(this.bApiLoad_Click);
             // 
+            // tabSettings
+            // 
+            this.tabSettings.Controls.Add(this.groupBox7);
+            this.tabSettings.Location = new System.Drawing.Point(4, 22);
+            this.tabSettings.Name = "tabSettings";
+            this.tabSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSettings.Size = new System.Drawing.Size(673, 425);
+            this.tabSettings.TabIndex = 7;
+            this.tabSettings.Text = "Settings";
+            this.tabSettings.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.cbCandleIntervall);
+            this.groupBox7.Location = new System.Drawing.Point(6, 6);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(145, 55);
+            this.groupBox7.TabIndex = 1;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Candle Intervall";
+            // 
+            // cbCandleIntervall
+            // 
+            this.cbCandleIntervall.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCandleIntervall.FormattingEnabled = true;
+            this.cbCandleIntervall.Items.AddRange(new object[] {
+            "Test",
+            "Test2"});
+            this.cbCandleIntervall.Location = new System.Drawing.Point(6, 19);
+            this.cbCandleIntervall.Name = "cbCandleIntervall";
+            this.cbCandleIntervall.Size = new System.Drawing.Size(121, 21);
+            this.cbCandleIntervall.TabIndex = 0;
+            this.cbCandleIntervall.SelectedIndexChanged += new System.EventHandler(this.cbCandleIntervall_SelectedIndexChanged);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -674,6 +714,8 @@
             this.tabApi.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.tabSettings.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -740,6 +782,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tbApiDllPath;
         private System.Windows.Forms.Button bApiLoad;
+        private System.Windows.Forms.TabPage tabSettings;
+        private System.Windows.Forms.ComboBox cbCandleIntervall;
+        private System.Windows.Forms.GroupBox groupBox7;
     }
 }
 
