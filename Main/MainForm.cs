@@ -207,8 +207,15 @@ namespace Main {
         #endregion
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            cm.saveToFile(Settings.getString(SettKeys.DATA_FILE));
-            Settings.save();
+            DialogResult dr = MessageBox.Show("Really close?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dr == DialogResult.No) {
+                e.Cancel = true;
+            } else {
+                cm.saveToFile(Settings.getString(SettKeys.DATA_FILE));
+                Settings.save();
+            }
+            
+
         }
 
 
