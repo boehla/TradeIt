@@ -86,6 +86,7 @@ namespace Main {
             try {
                 if (df.IsDisposed) df = new DebugForm();
                 df.Show();
+                df.Focus();
             } catch (Exception ex) {
                 Logging.logException("failed at showdebugclick", ex);
             }
