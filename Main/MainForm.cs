@@ -196,7 +196,7 @@ namespace Main {
         private void bReloadTrader_Click(object sender, EventArgs e) {
             chartControl.Series.Clear();
 
-            tr = loadTraderFromDll(Settings.getString(SettKeys.TRADER_DLL_FILE));
+            tr = loadTraderFromDll(tbTraderDllFilename.Text);
             refreshTraderStatus();
             if (tr != null) tr.Initiale();
 
