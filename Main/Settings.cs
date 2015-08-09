@@ -7,6 +7,8 @@ using System.IO;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Data;
+using System.Windows.Forms;
 
 namespace Main {
     public class Settings {
@@ -82,6 +84,31 @@ namespace Main {
             }
             Logging.log("No Option found for key " + key, LogPrior.Warning);
             return null;
+        }
+
+        static public DataTable getDataTable() {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("key");
+            dt.Columns.Add("value");
+
+            foreach (KeyValuePair<string, Object> entry in data) {
+                DataRow dr = dt.NewRow();
+                dr["key"] = entry.Key;
+                dr["value"] = entry.Value;
+                dt.Rows.Add(dr);
+            }
+            return dt;
+        }
+        static public void fromTable(DataGridView table) {
+            if (table == null) return;
+            if (table.Rows == null || table.Rows.Count <= 0) return;
+            if (!table.Columns.Contains("key") || !table.Columns.Contains("value")) return;
+
+            data.Clear();
+            foreach (DataGridViewRow row in table.Rows) {
+                set(Lib.Converter.toString(row.Cells["key"].Value), Lib.Converter.toString(row.Cells["value"].Value));
+            }
         }
     }
 }

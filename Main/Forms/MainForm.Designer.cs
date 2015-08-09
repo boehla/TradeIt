@@ -24,13 +24,13 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.bMainShowDebug = new System.Windows.Forms.Button();
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabDebug = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lChartPosition = new System.Windows.Forms.Label();
             this.chartControl = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -90,8 +90,10 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.tabDetailSettings = new System.Windows.Forms.TabPage();
+            this.dgvDetailSettings = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabDebug.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl)).BeginInit();
             this.tpTrader.SuspendLayout();
@@ -113,6 +115,8 @@
             this.groupBox7.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabDetailSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailSettings)).BeginInit();
             this.SuspendLayout();
             // 
             // bMainShowDebug
@@ -136,7 +140,7 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabDebug);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tpTrader);
             this.tabControl1.Controls.Add(this.tpStats);
@@ -144,22 +148,24 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabApi);
             this.tabControl1.Controls.Add(this.tabSettings);
+            this.tabControl1.Controls.Add(this.tabDetailSettings);
             this.tabControl1.Location = new System.Drawing.Point(12, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(681, 451);
             this.tabControl1.TabIndex = 1;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // tabPage1
+            // tabDebug
             // 
-            this.tabPage1.Controls.Add(this.bMainShowDebug);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(673, 425);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Debug";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabDebug.Controls.Add(this.bMainShowDebug);
+            this.tabDebug.Location = new System.Drawing.Point(4, 22);
+            this.tabDebug.Name = "tabDebug";
+            this.tabDebug.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDebug.Size = new System.Drawing.Size(673, 425);
+            this.tabDebug.TabIndex = 0;
+            this.tabDebug.Text = "Debug";
+            this.tabDebug.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -185,17 +191,17 @@
             // 
             // chartControl
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartControl.ChartAreas.Add(chartArea1);
+            chartArea4.Name = "ChartArea1";
+            this.chartControl.ChartAreas.Add(chartArea4);
             this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartControl.Legends.Add(legend1);
+            legend4.Name = "Legend1";
+            this.chartControl.Legends.Add(legend4);
             this.chartControl.Location = new System.Drawing.Point(3, 3);
             this.chartControl.Name = "chartControl";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartControl.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartControl.Series.Add(series4);
             this.chartControl.Size = new System.Drawing.Size(667, 419);
             this.chartControl.TabIndex = 0;
             this.chartControl.Text = "chart1";
@@ -742,6 +748,29 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
+            // tabDetailSettings
+            // 
+            this.tabDetailSettings.Controls.Add(this.dgvDetailSettings);
+            this.tabDetailSettings.Location = new System.Drawing.Point(4, 22);
+            this.tabDetailSettings.Name = "tabDetailSettings";
+            this.tabDetailSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDetailSettings.Size = new System.Drawing.Size(673, 425);
+            this.tabDetailSettings.TabIndex = 8;
+            this.tabDetailSettings.Text = "Detail Settings";
+            this.tabDetailSettings.UseVisualStyleBackColor = true;
+            // 
+            // dgvDetailSettings
+            // 
+            this.dgvDetailSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvDetailSettings.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvDetailSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetailSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDetailSettings.Location = new System.Drawing.Point(3, 3);
+            this.dgvDetailSettings.Name = "dgvDetailSettings";
+            this.dgvDetailSettings.Size = new System.Drawing.Size(667, 419);
+            this.dgvDetailSettings.TabIndex = 0;
+            this.dgvDetailSettings.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetailSettings_CellValueChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -756,7 +785,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabDebug.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl)).EndInit();
@@ -789,6 +818,8 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabDetailSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailSettings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -799,7 +830,7 @@
         private System.Windows.Forms.Button bMainShowDebug;
         private System.Windows.Forms.Timer TickTimer;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabDebug;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartControl;
         private System.Windows.Forms.Button bReloadTrader;
@@ -859,6 +890,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolStripMenuItem showDebugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabDetailSettings;
+        private System.Windows.Forms.DataGridView dgvDetailSettings;
     }
 }
 

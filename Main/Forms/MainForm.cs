@@ -80,6 +80,8 @@ namespace Main {
             nudMaxChartPoints.Value = Settings.getInt(SettKeys.MAX_CHART_POINTS);
             tbApiDllPath.Text = Settings.getString(SettKeys.API_DLL_FILE);
             tbTraderDllFilename.Text = Settings.getString(SettKeys.TRADER_DLL_FILE);
+
+            
         }
 
         private void bMainShowDebug_Click(object sender, EventArgs e) {
@@ -395,7 +397,17 @@ namespace Main {
         private void nudMaxChartPoints_ValueChanged(object sender, EventArgs e) {
             if (tr != null) {
                 tr.MaxChartPoints = (int)nudMaxChartPoints.Value;
-                Settings.set(SettKeys.MAX_CHART_POINTS, tr.MaxChartPoints);
+            } 
+            Settings.set(SettKeys.MAX_CHART_POINTS, (int)nudMaxChartPoints.Value);
+        }
+
+        private void dgvDetailSettings_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+            Settings.fromTable(dgvDetailSettings);
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
+            if (tabControl1.SelectedTab == tabDetailSettings) {
+                dgvDetailSettings.DataSource = Settings.getDataTable();
             }
         }
     }
