@@ -6,6 +6,7 @@ TODO:
 * Make something like a Data import class, for easily adding new methods 
 * Options Datagrid -> easy to add new options
 * Trader current Info String
+* Logo, very importand ^^
 
 HowTo:
 * http://stackoverflow.com/questions/18362361/visual-studio-how-to-create-project-from-existing-github-repository
