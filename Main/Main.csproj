@@ -7,8 +7,8 @@
     <ProjectGuid>{EA9A17C0-B0AC-40AC-B945-7B6108B5026A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Main</RootNamespace>
-    <AssemblyName>Main</AssemblyName>
+    <RootNamespace>TradeIt</RootNamespace>
+    <AssemblyName>TradeIt</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
