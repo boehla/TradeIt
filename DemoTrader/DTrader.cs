@@ -38,11 +38,14 @@ namespace DemoTrader
             plot("ema short", Data.ema(2));
             plot("price", Data.Candle().value.Last);
             plot("macd", mymacd, true);
-            if (TickCount % 2 == 0) {
-                buyBtc(10);
-            } else {
-                sellBtc(10);
-            }
+            int tradeint = 100;
+            if (TickCount % tradeint == 0) {
+                if (TickCount % (tradeint * 2) == 0) {
+                    buyBtc(10);
+                } else {
+                    sellBtc(10);
+                }
+            } 
             base.Update();
         }
         public override void Stop() {
