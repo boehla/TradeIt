@@ -31,11 +31,13 @@
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabDebug = new System.Windows.Forms.TabPage();
+            this.dgvDebugWatch = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lChartPosition = new System.Windows.Forms.Label();
             this.chartControl = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tpTrader = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tbTraderStatus = new System.Windows.Forms.TextBox();
             this.cbTraderLive = new System.Windows.Forms.CheckBox();
             this.lTraderStatus = new System.Windows.Forms.Label();
             this.gbTraderDllSettings = new System.Windows.Forms.GroupBox();
@@ -53,7 +55,7 @@
             this.lCurPortoBTC = new System.Windows.Forms.Label();
             this.lCurPortoEUR = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabHelp = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.lHelpMemoryUsed = new System.Windows.Forms.Label();
@@ -92,9 +94,9 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.tbTraderStatus = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDebugWatch)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl)).BeginInit();
             this.tpTrader.SuspendLayout();
@@ -103,7 +105,7 @@
             this.tpStats.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabHelp.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -145,7 +147,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tpTrader);
             this.tabControl1.Controls.Add(this.tpStats);
-            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabHelp);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabApi);
             this.tabControl1.Controls.Add(this.tabSettings);
@@ -159,6 +161,7 @@
             // 
             // tabDebug
             // 
+            this.tabDebug.Controls.Add(this.dgvDebugWatch);
             this.tabDebug.Controls.Add(this.bMainShowDebug);
             this.tabDebug.Location = new System.Drawing.Point(4, 22);
             this.tabDebug.Name = "tabDebug";
@@ -167,6 +170,19 @@
             this.tabDebug.TabIndex = 0;
             this.tabDebug.Text = "Debug";
             this.tabDebug.UseVisualStyleBackColor = true;
+            // 
+            // dgvDebugWatch
+            // 
+            this.dgvDebugWatch.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvDebugWatch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvDebugWatch.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvDebugWatch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDebugWatch.Location = new System.Drawing.Point(6, 35);
+            this.dgvDebugWatch.Name = "dgvDebugWatch";
+            this.dgvDebugWatch.Size = new System.Drawing.Size(661, 384);
+            this.dgvDebugWatch.TabIndex = 1;
             // 
             // tabPage2
             // 
@@ -231,6 +247,14 @@
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Status";
+            // 
+            // tbTraderStatus
+            // 
+            this.tbTraderStatus.Location = new System.Drawing.Point(6, 50);
+            this.tbTraderStatus.Multiline = true;
+            this.tbTraderStatus.Name = "tbTraderStatus";
+            this.tbTraderStatus.Size = new System.Drawing.Size(303, 266);
+            this.tbTraderStatus.TabIndex = 6;
             // 
             // cbTraderLive
             // 
@@ -402,17 +426,17 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "BTC:";
             // 
-            // tabPage3
+            // tabHelp
             // 
-            this.tabPage3.Controls.Add(this.groupBox5);
-            this.tabPage3.Controls.Add(this.groupBox4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(673, 425);
-            this.tabPage3.TabIndex = 4;
-            this.tabPage3.Text = "Help";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabHelp.Controls.Add(this.groupBox5);
+            this.tabHelp.Controls.Add(this.groupBox4);
+            this.tabHelp.Location = new System.Drawing.Point(4, 22);
+            this.tabHelp.Name = "tabHelp";
+            this.tabHelp.Padding = new System.Windows.Forms.Padding(3);
+            this.tabHelp.Size = new System.Drawing.Size(673, 425);
+            this.tabHelp.TabIndex = 4;
+            this.tabHelp.Text = "Help";
+            this.tabHelp.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -773,14 +797,6 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // tbTraderStatus
-            // 
-            this.tbTraderStatus.Location = new System.Drawing.Point(6, 50);
-            this.tbTraderStatus.Multiline = true;
-            this.tbTraderStatus.Name = "tbTraderStatus";
-            this.tbTraderStatus.Size = new System.Drawing.Size(303, 266);
-            this.tbTraderStatus.TabIndex = 6;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -796,6 +812,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabDebug.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDebugWatch)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartControl)).EndInit();
@@ -809,7 +826,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
+            this.tabHelp.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -874,7 +891,7 @@
         private System.Windows.Forms.ToolStripMenuItem resetDatabaseToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.ToolStripStatusLabel tssTraderInfo;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabHelp;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lHelpVersion;
         private System.Windows.Forms.Label lHelpCompileDate;
@@ -903,6 +920,7 @@
         private System.Windows.Forms.TabPage tabDetailSettings;
         private System.Windows.Forms.DataGridView dgvDetailSettings;
         private System.Windows.Forms.TextBox tbTraderStatus;
+        private System.Windows.Forms.DataGridView dgvDebugWatch;
     }
 }
 

@@ -11,12 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Main.Api;
+using TradeIt.Forms;
 
 namespace Main {
     public partial class MainForm : Form {
-        public const string MAINVERSION = "0.1.0";
+        public const string MAINVERSION = "0.1.1";
 
-        public static DebugForm df = null;
+        public static FastDebugForm df = null;
         public Api.ApiHelp kh = new ApiHelp();
         public CandleManager cm = new CandleManager();
         public Trader tr;
@@ -25,7 +26,7 @@ namespace Main {
         public CandleInterval candleInter = CandleInterval._5m;
 
         public MainForm() {
-            df = new DebugForm();
+            df = new FastDebugForm();
             InitializeComponent();
             Logging.log("Application started...", LogPrior.Info);
             chartcont = chartControl;
@@ -86,7 +87,7 @@ namespace Main {
 
         private void bMainShowDebug_Click(object sender, EventArgs e) {
             try {
-                if (df.IsDisposed) df = new DebugForm();
+                if (df.IsDisposed) df = new FastDebugForm();
                 df.Show();
                 df.Focus();
             } catch (Exception ex) {
@@ -122,8 +123,14 @@ namespace Main {
                     dgvTradeHistory.DataSource = trd.getDataTable();
                     dgvTradeHistory.Refresh();
                 }
+
+                if (tabControl1.SelectedTab == tabDebug) {
+                    dgvDebugWatch.DataSource = Lib.Performance.getTable();
+                } else if (tabControl1.SelectedTab == tabHelp) {
+                    refreshMemoryStats();
+                }
                 if (Settings.HasChange) Settings.save();
-                refreshMemoryStats();
+                
             } catch (Exception ex) {
                 Logging.logException("Failed at Timercounter: " + timercounter, ex);
             } finally {

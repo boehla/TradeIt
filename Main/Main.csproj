@@ -37,6 +37,10 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.15.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dlls\FastColoredTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="Jayrock">
       <HintPath>..\..\..\..\..\ownCloud\tradeitcs\libs\Jayrock.dll</HintPath>
     </Reference>
@@ -62,13 +66,13 @@
     <Compile Include="Api\ApiPortfolio.cs" />
     <Compile Include="Api\ApiTicker.cs" />
     <Compile Include="Api\ApiTrade.cs" />
-    <Compile Include="Forms\DebugForm.cs">
+    <Compile Include="Enums.cs" />
+    <Compile Include="Forms\FastDebugForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DebugForm.Designer.cs">
-      <DependentUpon>DebugForm.cs</DependentUpon>
+    <Compile Include="Forms\FastDebugForm.Designer.cs">
+      <DependentUpon>FastDebugForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Enums.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -90,11 +94,15 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Forms\FastDebugForm.resx">
+      <DependentUpon>FastDebugForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dlls\FastColoredTextBox.dll" />
     <Content Include="dlls\Jayrock.dll" />
     <Content Include="dlls\Jayrock.Json.dll" />
     <Content Include="dlls\Jayrock.Json.pdb" />

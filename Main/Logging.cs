@@ -11,6 +11,9 @@ namespace Main {
         private static int _maxFileSize_kb = 1000;
         private static string _folder = "logs\\";
         private static bool _withDate = true;
+        private static Dictionary<LogPrior, StringBuilder> logBuffer = new Dictionary<LogPrior, StringBuilder>();
+        private static DateTime logBufferAge = new DateTime(0);
+        //private static TimeSpan 
 
         private static LogPrior _forceLogPrior = LogPrior.Debug;
 
@@ -18,6 +21,7 @@ namespace Main {
             log(text, lp, DateTime.MinValue);
         }
         public static void log(string text, LogPrior lp, DateTime dt) {
+            Lib.Performance.setWatch("log", true);
             if ((int)_forceLogPrior > (int)lp) return;
             if (dt < Lib.Const.NULL_DATE) dt = DateTime.Now;
             if (_withDate) text = dt.ToString("dd.MM.yyyy HH:mm:ss") + " " + text;
@@ -44,11 +48,41 @@ namespace Main {
                         break;
                 }
             }
-            string filename = "log_" + lp.ToString() + ".txt";
-            writeToLogFile(text, filename);
+            
+            
+
+
+            //writeToLogFile(text, filename);
+            //writeToLogFile(prefix + " " + text, "log_All.txt");
+            addToBuffer(lp, text);
+            Lib.Performance.setWatch("log", false);
+        }
+        private static void addToBuffer(LogPrior lp, string text) {
+            Lib.Performance.setWatch("addlogbuffer", true);
+            if(!logBuffer.ContainsKey(LogPrior.All)) logBuffer.Add(LogPrior.All, new StringBuilder());
+            if (!logBuffer.ContainsKey(lp)) logBuffer.Add(lp, new StringBuilder());
+
             string prefix = lp.ToString();
             if (prefix.Length > 0) prefix = prefix.Substring(0, 2);
-            writeToLogFile(prefix + " " + text, "log_All.txt");
+
+            logBuffer[lp].Append(text);
+            logBuffer[LogPrior.All].Append(prefix + " " + text);
+
+            if (logBufferAge.AddSeconds(5) < DateTime.Now) {
+                emptyBuffer();
+            }
+            Lib.Performance.setWatch("addlogbuffer", false);
+        }
+        private static void emptyBuffer() {
+            Lib.Performance.setWatch("emptyBuffer", true);
+            foreach (KeyValuePair<LogPrior, StringBuilder> entry in logBuffer) {
+                string filename = "log_" + entry.Key.ToString() + ".txt";
+                writeToLogFile(entry.Value.ToString(), filename);
+                entry.Value.Clear();
+            }
+            logBuffer.Clear();
+            logBufferAge = DateTime.Now;
+            Lib.Performance.setWatch("emptyBuffer", false);
         }
 
         public static void logException(string text, Exception ex) {
@@ -75,9 +109,11 @@ namespace Main {
         }
         public static void setForceLogPrior(LogPrior lp) {
             _forceLogPrior = lp;
+            MainForm.df.stopUpdate();
         }
         public static void releaseForceLogPrior() {
             _forceLogPrior = LogPrior.Debug;
+            MainForm.df.stopUpdate();
         }
     }
 }

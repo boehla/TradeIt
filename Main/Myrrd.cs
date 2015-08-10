@@ -105,6 +105,7 @@ namespace Main {
                 Logging.log("loadFromFile, File not exist:" + filename, LogPrior.Warning);
                 return false;
             }
+            Lib.Performance.setWatch("loadFormFile", true);
             Logging.log("Start importing candledata from: " + filename, LogPrior.Info);
             int countcandles = 0;
             if (!merge || candllist.Count <= 0) {
@@ -149,6 +150,7 @@ namespace Main {
             Logging.releaseForceLogPrior();
             fin.Close();
             Logging.log(String.Format("Import Candledata finished ({0} candleListes and {1} candles)", candllist.Count, countcandles), LogPrior.Info);
+            Lib.Performance.setWatch("loadFormFile", false);
             return true;
         }
         public bool loadFromBitcoinAvarage(string filename, bool merge) {
