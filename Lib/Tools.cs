@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Data;
 
 namespace Lib
 {
@@ -126,6 +128,68 @@ namespace Lib
                 space /= 1024;
             }
             return string.Format("{0}{1}", space, suffix[logsize]);
+        }
+        static public string formatTimeSpan(TimeSpan ts) {
+            string ret = "";
+            if (ts.Days > 0) ret += ts.Days + "d ";
+            if (ts.Hours > 0) ret += ts.Hours + "h ";
+            if (ts.Minutes > 0) ret += ts.Minutes + "m ";
+            if (ts.Seconds > 0) ret += ts.Seconds + "s ";
+            if (ts.Milliseconds > 0) ret += ts.Milliseconds + "ms ";
+            return ret;
+        }
+    }
+    public class Performance {
+        static private Dictionary<string, MyWatch> watches = new Dictionary<string, MyWatch>();
+
+        static public void setWatch(string key, bool on) {
+            if(key != "total") setWatch("total", on);
+            if(watches.ContainsKey(key)) watches.Add(key, new MyWatch);
+            if(on){
+                watches[key].Start();
+            }else{
+                watches[key].Stop();
+            }
+        }
+
+        static public DataTable getTable() {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("key");
+            dt.Columns.Add("total");
+            dt.Columns.Add("avarage");
+            dt.Columns.Add("avarage_ticks");
+            dt.Columns.Add("count");
+
+            foreach (KeyValuePair<string, MyWatch> entry in watches) {
+                DataRow dr = dt.NewRow();
+                dr["key"] = entry.Key;
+                dr["total"] = Lib.Tools.formatTimeSpan(entry.Value.Total);
+                dr["avarage"] = Lib.Tools.formatTimeSpan(entry.Value.Avarage);
+                dr["avarage_ticks"] = entry.Value.Avarage.Ticks;
+                dr["count"] = entry.Value.Count;
+                dt.Rows.Add(dr);
+            }
+            return dt;
+        }
+
+        private class MyWatch : Stopwatch {
+            private int count = 0;
+            public void Start() {
+                base.Start();
+            }
+            public void Stop() {
+                if (base.IsRunning) count++;
+                base.Stop();
+            }
+            public TimeSpan Avarage {
+                get { return  new TimeSpan(base.ElapsedTicks / count); }
+            }
+            public TimeSpan Total {
+                get { return new TimeSpan(base.ElapsedTicks); }
+            }
+            public int Count {
+                get { return count; }
+            }
         }
     }
 }
