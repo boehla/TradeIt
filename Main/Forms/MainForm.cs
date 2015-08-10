@@ -265,9 +265,11 @@ namespace Main {
 
             if (tr != null) {
                 tssTraderInfo.Text = string.Format("Trader: {0} (V: {1})", tr.Name, tr.Version);
+                if (!tbTraderStatus.Text.Equals(tr.Status)) tbTraderStatus.Text = tr.Status;
             } else {
                 tssTraderInfo.Text = string.Format("Trader: None");
             }
+            
         }
 
         private void tradeItFileToolStripMenuItem_Click(object sender, EventArgs e) {

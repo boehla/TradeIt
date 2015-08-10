@@ -18,6 +18,7 @@ namespace Main {
         private bool live = false;
         private ApiPortfolio _startPortfolio = null;
         private int maxChartPoints = 300;
+        private string status = "";
 
         public DateTime CurDate {
             get {
@@ -31,6 +32,10 @@ namespace Main {
         public int MaxChartPoints {
             get { return maxChartPoints; }
             set { maxChartPoints = value; }
+        }
+        public string Status {
+            get { return status; }
+            set { status = value; }
         }
         public virtual string Version {
             get { return "ND"; }

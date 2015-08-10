@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.bMainShowDebug = new System.Windows.Forms.Button();
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -75,6 +75,8 @@
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.cbCandleIntervall = new System.Windows.Forms.ComboBox();
+            this.tabDetailSettings = new System.Windows.Forms.TabPage();
+            this.dgvDetailSettings = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssTraderInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssApiInfo = new System.Windows.Forms.ToolStripStatusLabel();
@@ -90,8 +92,7 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.tabDetailSettings = new System.Windows.Forms.TabPage();
-            this.dgvDetailSettings = new System.Windows.Forms.DataGridView();
+            this.tbTraderStatus = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -113,10 +114,10 @@
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).BeginInit();
             this.groupBox7.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tabDetailSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailSettings)).BeginInit();
+            this.statusStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // bMainShowDebug
@@ -191,17 +192,17 @@
             // 
             // chartControl
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartControl.ChartAreas.Add(chartArea4);
+            chartArea1.Name = "ChartArea1";
+            this.chartControl.ChartAreas.Add(chartArea1);
             this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend4.Name = "Legend1";
-            this.chartControl.Legends.Add(legend4);
+            legend1.Name = "Legend1";
+            this.chartControl.Legends.Add(legend1);
             this.chartControl.Location = new System.Drawing.Point(3, 3);
             this.chartControl.Name = "chartControl";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartControl.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartControl.Series.Add(series1);
             this.chartControl.Size = new System.Drawing.Size(667, 419);
             this.chartControl.TabIndex = 0;
             this.chartControl.Text = "chart1";
@@ -221,11 +222,12 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.tbTraderStatus);
             this.groupBox3.Controls.Add(this.cbTraderLive);
             this.groupBox3.Controls.Add(this.lTraderStatus);
             this.groupBox3.Location = new System.Drawing.Point(6, 97);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(315, 63);
+            this.groupBox3.Size = new System.Drawing.Size(315, 322);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Status";
@@ -642,6 +644,29 @@
             this.cbCandleIntervall.TabIndex = 0;
             this.cbCandleIntervall.SelectedIndexChanged += new System.EventHandler(this.cbCandleIntervall_SelectedIndexChanged);
             // 
+            // tabDetailSettings
+            // 
+            this.tabDetailSettings.Controls.Add(this.dgvDetailSettings);
+            this.tabDetailSettings.Location = new System.Drawing.Point(4, 22);
+            this.tabDetailSettings.Name = "tabDetailSettings";
+            this.tabDetailSettings.Padding = new System.Windows.Forms.Padding(3);
+            this.tabDetailSettings.Size = new System.Drawing.Size(673, 425);
+            this.tabDetailSettings.TabIndex = 8;
+            this.tabDetailSettings.Text = "Detail Settings";
+            this.tabDetailSettings.UseVisualStyleBackColor = true;
+            // 
+            // dgvDetailSettings
+            // 
+            this.dgvDetailSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvDetailSettings.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvDetailSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetailSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDetailSettings.Location = new System.Drawing.Point(3, 3);
+            this.dgvDetailSettings.Name = "dgvDetailSettings";
+            this.dgvDetailSettings.Size = new System.Drawing.Size(667, 419);
+            this.dgvDetailSettings.TabIndex = 0;
+            this.dgvDetailSettings.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetailSettings_CellValueChanged);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -748,28 +773,13 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // tabDetailSettings
+            // tbTraderStatus
             // 
-            this.tabDetailSettings.Controls.Add(this.dgvDetailSettings);
-            this.tabDetailSettings.Location = new System.Drawing.Point(4, 22);
-            this.tabDetailSettings.Name = "tabDetailSettings";
-            this.tabDetailSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabDetailSettings.Size = new System.Drawing.Size(673, 425);
-            this.tabDetailSettings.TabIndex = 8;
-            this.tabDetailSettings.Text = "Detail Settings";
-            this.tabDetailSettings.UseVisualStyleBackColor = true;
-            // 
-            // dgvDetailSettings
-            // 
-            this.dgvDetailSettings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvDetailSettings.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgvDetailSettings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDetailSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvDetailSettings.Location = new System.Drawing.Point(3, 3);
-            this.dgvDetailSettings.Name = "dgvDetailSettings";
-            this.dgvDetailSettings.Size = new System.Drawing.Size(667, 419);
-            this.dgvDetailSettings.TabIndex = 0;
-            this.dgvDetailSettings.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetailSettings_CellValueChanged);
+            this.tbTraderStatus.Location = new System.Drawing.Point(6, 50);
+            this.tbTraderStatus.Multiline = true;
+            this.tbTraderStatus.Name = "tbTraderStatus";
+            this.tbTraderStatus.Size = new System.Drawing.Size(303, 266);
+            this.tbTraderStatus.TabIndex = 6;
             // 
             // MainForm
             // 
@@ -814,12 +824,12 @@
             this.groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudMaxChartPoints)).EndInit();
             this.groupBox7.ResumeLayout(false);
+            this.tabDetailSettings.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailSettings)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabDetailSettings.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDetailSettings)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -892,6 +902,7 @@
         private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
         private System.Windows.Forms.TabPage tabDetailSettings;
         private System.Windows.Forms.DataGridView dgvDetailSettings;
+        private System.Windows.Forms.TextBox tbTraderStatus;
     }
 }
 
