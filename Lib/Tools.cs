@@ -144,7 +144,7 @@ namespace Lib
 
         static public void setWatch(string key, bool on) {
             if(key != "total") setWatch("total", on);
-            if(watches.ContainsKey(key)) watches.Add(key, new MyWatch);
+            if(watches.ContainsKey(key)) watches.Add(key, new MyWatch( ));
             if(on){
                 watches[key].Start();
             }else{
