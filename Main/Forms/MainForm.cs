@@ -362,18 +362,22 @@ namespace Main {
         }
 
         private void chartControl_MouseMove(object sender, MouseEventArgs e) {
-            chartcont.ChartAreas[0].CursorX.SetCursorPixelPosition(new Point(e.X, e.Y), false);
-            chartcont.ChartAreas[0].CursorY.SetCursorPixelPosition(new Point(e.X, e.Y), false);
+            try {
+                chartcont.ChartAreas[0].CursorX.SetCursorPixelPosition(new Point(e.X, e.Y), false);
+                chartcont.ChartAreas[0].CursorY.SetCursorPixelPosition(new Point(e.X, e.Y), false);
 
-            double xValue = chartcont.ChartAreas[0].AxisX.PixelPositionToValue(e.X);
-            double yValue = chartcont.ChartAreas[0].AxisY.PixelPositionToValue(e.Y);
+                double xValue = chartcont.ChartAreas[0].AxisX.PixelPositionToValue(e.X);
+                double yValue = chartcont.ChartAreas[0].AxisY.PixelPositionToValue(e.Y);
 
 
-            double pX = chartcont.ChartAreas[0].CursorX.Position; //X Axis Coordinate of your mouse cursor
-            double pY = chartcont.ChartAreas[0].CursorY.Position; //Y Axis Coordinate of your mouse cursor
+                double pX = chartcont.ChartAreas[0].CursorX.Position; //X Axis Coordinate of your mouse cursor
+                double pY = chartcont.ChartAreas[0].CursorY.Position; //Y Axis Coordinate of your mouse cursor
 
-            DateTime dt = DateTime.FromOADate(xValue);
-            lChartPosition.Text = string.Format("{0:dd.MM HH:mm} / {1}", dt, pY);
+                DateTime dt = DateTime.FromOADate(xValue);
+                lChartPosition.Text = string.Format("{0:dd.MM HH:mm} / {1}", dt, pY);
+            } catch (Exception ex) {
+                Logging.logException("chart error", ex);
+            }
         }
 
         private void bApiLoad_Click(object sender, EventArgs e) {
