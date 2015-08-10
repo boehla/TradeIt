@@ -46,7 +46,7 @@ namespace Main {
         private void MainForm_Load(object sender, EventArgs e) {
             cm.generateNew();
             //cm.generateNew();
-            //cm.loadFromFile("data\\backup.data");
+            cm.loadFromFile("data\\backup.data", false);
 
             //tr = loadTraderFromDll(Settings.getString(SettKeys.TRADER_DLL_FILE));
             //if (tr != null) tr.Initiale();
