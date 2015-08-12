@@ -10,7 +10,7 @@ namespace Main.Api {
     public class ApiTicker {
         public double Ask { get; set; }
         public double Bid { get; set; }
-        public double Last { get; set; }
+        private double last = -1;
         public double Volume { get; set; }
         public double VolumeWeight { get; set; }
         public int NumberOfTrades { get; set; }
@@ -18,10 +18,24 @@ namespace Main.Api {
         public double High { get; set; }
         public bool CorrectData { get; set; }
 
+        public double Open { get; set; }
+        public double Close { get; set; }
+
         private int _countMerged;
         public int CountMerged {
             get { return _countMerged; }
             set { _countMerged = value; }
+        }
+        public double Last {
+            get { return last; }
+            set {
+                last = value;
+                if (last < 0) return;
+                if (Open < 0) Open = last;
+                Close = last;
+                if (last < Low || Low < 0) Low = last;
+                if (last > High) High = last;
+            }
         }
 
         public ApiTicker() {
@@ -34,6 +48,8 @@ namespace Main.Api {
             Low = -1;
             High = -1;
             _countMerged = 1;
+            Open = -1;
+            Close = -1;
             CorrectData = false;
         }
 
@@ -50,6 +66,14 @@ namespace Main.Api {
             this.NumberOfTrades = (int)mergeDoubleAvarage(this.NumberOfTrades, newapi.NumberOfTrades);
             this.Low = mergeDoubleMin(this.Low, newapi.Low);
             this.High = mergeDoubleMax(this.High, newapi.High);
+
+            if(newapi.Last > 0){
+                if (this.Low > newapi.Last || this.Low < 0) this.Low = newapi.Last;
+                if (this.High < newapi.Last) this.High = newapi.Last;
+            }
+
+            if (this.Open < 0) this.Open = newapi.Last;
+            this.Close = newapi.Last;
             _countMerged++;
         }
         public ApiTicker clone() {
@@ -57,13 +81,15 @@ namespace Main.Api {
 
             ret.Ask = this.Ask;
             ret.Bid = this.Bid;
-            ret.Last = this.Last;
+            ret.last = this.last;
             ret.Volume = this.Volume;
             ret.VolumeWeight = this.VolumeWeight;
             ret.NumberOfTrades = this.NumberOfTrades;
             ret.Low = this.Low;
             ret.High = this.High;
             ret._countMerged = this._countMerged;
+            ret.Open = this.Open;
+            ret.Close = this.Close;
 
             return ret;
         }
