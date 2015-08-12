@@ -281,28 +281,32 @@ namespace Main {
 
         private void tradeItFileToolStripMenuItem_Click(object sender, EventArgs e) {
             string initFolderId = "FILEDIALOG_INIT_DATAFILE";
-            if (Settings.getString(initFolderId).Length > 0) openFileDialog.InitialDirectory = Settings.getString(initFolderId);
-            openFileDialog.FileName = Settings.getString(SettKeys.DATA_FILE);
-            DialogResult dr = openFileDialog.ShowDialog();
-            if (dr == DialogResult.OK) {
-                Settings.set(initFolderId, Path.GetDirectoryName(openFileDialog.FileName));
-                foreach (string file in openFileDialog.FileNames) {
-                    cm.loadFromFile(file, true);
-                }
-
+            string[] files = showFileDialog(initFolderId);
+            if (files == null || files.Length <= 0) return;
+            foreach (string file in files) {
+                cm.loadFromFile(file, true);
             }
         }
 
         private void bitcoinavaragecomToolStripMenuItem_Click(object sender, EventArgs e) {
             string initFolderId = "FILEDIALOG_INIT_DATAFILE_BITCOINAVARAGE";
-            if (Settings.getString(initFolderId).Length > 0) openFileDialog.InitialDirectory = Settings.getString(initFolderId);
+            string[] files = showFileDialog(initFolderId);
+            if (files == null || files.Length <= 0) return;
+            foreach (string file in files) {
+                cm.loadFromBitcoinAvarage(file, true);
+            }
+        }
+
+        private string[] showFileDialog(string initFolderId) {
+            string initFolder = Settings.getString(initFolderId);
+            if(initFolder.Length > 0 && !Directory.Exists(initFolder)) initFolder = "";
+            openFileDialog.InitialDirectory = initFolder;
             DialogResult dr = openFileDialog.ShowDialog();
             if (dr == DialogResult.OK) {
                 Settings.set(initFolderId, Path.GetDirectoryName(openFileDialog.FileName));
-                foreach (string file in openFileDialog.FileNames) {
-                    cm.loadFromBitcoinAvarage(file, true);
-                }
+                return openFileDialog.FileNames;
             }
+            return null;
         }
 
         private void resetDatabaseToolStripMenuItem_Click(object sender, EventArgs e) {
