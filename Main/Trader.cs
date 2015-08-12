@@ -68,7 +68,7 @@ namespace Main {
         }
 
         public Trader() {
-
+            maxChartPoints = Settings.getInt(SettKeys.MAX_CHART_POINTS);
         }
         public void init(ApiHelp kh, CandleInterval ci, CandleManager cm) {
             this._api = kh;
@@ -110,8 +110,21 @@ namespace Main {
             if (_cm.CandleList[(int)_ci].getCandelCount() > 0) dt = Data.Candle().dt;
             Logging.log(text, LogPrior.Trader, dt);
         }
+        public void plotCandle(string name, Candle cl,bool secondaryAxis = false, int area = 0) {
+            if (cl == null) {
+                Logging.log("Candle is null -> skip plot", LogPrior.Warning);
+                return;
+            }
+            double[] candleData = new double[] { cl.value.High, cl.value.Low, cl.value.Open, cl.value.Close };
+            plot(name, candleData, secondaryAxis, area);
+        }
         public void plot(string name, double value, bool secondaryAxis = false, int area = 0) {
+            plot(name, new double[] { value }, secondaryAxis, area);
+        }
+        private void plot(string name, double[] values, bool secondaryAxis = false, int area = 0) {
             if (MainForm.chartcont == null) return;
+            bool isCandle = false;
+            if (values.Length == 4) isCandle = true;
             if (secondaryAxis) name += " (sec)";
             while (MainForm.chartcont.ChartAreas.Count <= area) {
                 ChartArea ca = new ChartArea(area.ToString());
@@ -129,13 +142,28 @@ namespace Main {
             if (ser == null) {
                 ser = new Series(name);
                 ser.ChartType = SeriesChartType.Line;
-                ser.XValueType = ChartValueType.DateTime;
-                ser.BorderWidth = 5;
+                if (isCandle) ser.ChartType = SeriesChartType.Candlestick;
+                else {
+                    ser.XValueType = ChartValueType.DateTime;
+                }
+                if(isCandle) ser.BorderWidth = 2;
+                else ser.BorderWidth = 5;
                 if (area > 0) ser.ChartArea = area.ToString();
                 MainForm.chartcont.Series.Add(ser);
+                if (isCandle) {
+                    MainForm.chartcont.Series[ser.Name]["PriceUpColor"] = "Green";
+                    MainForm.chartcont.Series[ser.Name]["PriceDownColor"] = "Red";
+                }
             }
             if(secondaryAxis) ser.YAxisType = AxisType.Secondary;
-            ser.Points.AddXY(_data.Candle().dt, value);
+
+            if (!isCandle) ser.Points.AddXY(_data.Candle().dt, values[0]);
+            else {
+                int x = ser.Points.AddXY(_data.Candle().dt, values[0]);
+                ser.Points[x].YValues[1] = values[1];
+                ser.Points[x].YValues[2] = values[2];
+                ser.Points[x].YValues[3] = values[3];
+            }
 
             checkSerMaxPoints();
             //if (value > chartmaxy) chartmaxy = value;
