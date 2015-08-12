@@ -142,6 +142,13 @@ namespace Main {
                         tick.Low = Lib.Converter.toDouble(csvs[9]);
                         tick.High = Lib.Converter.toDouble(csvs[10]);
                         tick.CountMerged = Lib.Converter.toInt(csvs[11]);
+                        if (csvs.Length > 13) {
+                            tick.Open = Lib.Converter.toDouble(csvs[12]);
+                            tick.Close = Lib.Converter.toDouble(csvs[13]);
+                        } else {
+                            tick.Close = tick.Open = tick.Last;
+                        }
+                        tick.CorrectData = true;
                         candllist[key].AddTick(tick, dt);
                         countcandles++;
                         break;
@@ -176,6 +183,7 @@ namespace Main {
                 } else if (csvs.Length == 2) {
                     tick.Last = Lib.Converter.toDouble(csvs[1]);
                 }
+                tick.CorrectData = true;
                 this.addToAllNewTicker(tick, dt);
             }
             Logging.releaseForceLogPrior();
@@ -319,7 +327,7 @@ namespace Main {
         }
 
         public string getCSVLine(int key) {
-            return Lib.Tools.seperateCSV(Lib.Const.CSV_DEL, Lib.Const.IDS.CANDLE_ITEM, key, dt, value.Ask, value.Bid, value.Last, value.Volume, value.VolumeWeight, value.NumberOfTrades, value.Low, value.High, value.CountMerged);
+            return Lib.Tools.seperateCSV(Lib.Const.CSV_DEL, Lib.Const.IDS.CANDLE_ITEM, key, dt, value.Ask, value.Bid, value.Last, value.Volume, value.VolumeWeight, value.NumberOfTrades, value.Low, value.High, value.CountMerged, value.Open, value.Close);
         }
     }
     public class NewCandleArgs : EventArgs {
