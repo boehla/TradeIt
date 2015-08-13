@@ -4,7 +4,6 @@ TODO:
 * Backtesting with simulating Portfolio
 * Some btc's are still in the code
 * Make something like a Data import class, for easily adding new methods 
-* Trader current Info String
 * Logo, very importand ^^
 * Send Email in Trader Plugin
 
