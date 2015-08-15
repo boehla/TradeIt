@@ -17,6 +17,7 @@ namespace Main {
         private int tickcount = 0;
         private bool live = false;
         private ApiPortfolio _startPortfolio = null;
+        private ApiPortfolio _simulatePortfolio = null; 
         private int maxChartPoints = 300;
         private string status = "";
 
@@ -61,6 +62,10 @@ namespace Main {
         }
         public ApiPortfolio Portfolio {
             get { return _api.Portfolio; }
+        }
+        public ApiPortfolio SimulatePortfolio {
+            get { return _simulatePortfolio; }
+            set { _simulatePortfolio = value; }
         }
         public bool Live {
             get { return live; }
