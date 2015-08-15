@@ -17,6 +17,7 @@ namespace Lib {
         public class IDS {
             public const string CANDLE_LIST = "CLIST";
             public const string CANDLE_ITEM = "CITEM";
+            public const string TEXTBOX = "textbox%";
         }
     }
 }
