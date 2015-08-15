@@ -71,11 +71,13 @@ namespace DemoApi
             return ret;
         }
 
-        public override void sell(decimal volume) {
+        public override bool sell(decimal volume) {
             base.sell(volume);
+            return true;
         }
-        public override void buy(decimal volume) {
+        public override bool buy(decimal volume) {
             base.buy(volume);
+            return true;
         }
     }
 }

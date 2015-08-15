@@ -44,7 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbTraderDllFilename = new System.Windows.Forms.TextBox();
             this.bReloadTrader = new System.Windows.Forms.Button();
-            this.tpStats = new System.Windows.Forms.TabPage();
+            this.tabStats = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lStartPortoBTC = new System.Windows.Forms.Label();
@@ -113,7 +113,7 @@
             this.tpTrader.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.gbTraderDllSettings.SuspendLayout();
-            this.tpStats.SuspendLayout();
+            this.tabStats.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.groupBox9.SuspendLayout();
@@ -159,7 +159,7 @@
             this.tabControl1.Controls.Add(this.tabDebug);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tpTrader);
-            this.tabControl1.Controls.Add(this.tpStats);
+            this.tabControl1.Controls.Add(this.tabStats);
             this.tabControl1.Controls.Add(this.tabHelp);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabApi);
@@ -330,19 +330,19 @@
             this.bReloadTrader.UseVisualStyleBackColor = true;
             this.bReloadTrader.Click += new System.EventHandler(this.bReloadTrader_Click);
             // 
-            // tpStats
+            // tabStats
             // 
-            this.tpStats.Controls.Add(this.groupBox2);
-            this.tpStats.Controls.Add(this.groupBox10);
-            this.tpStats.Controls.Add(this.groupBox9);
-            this.tpStats.Controls.Add(this.groupBox1);
-            this.tpStats.Location = new System.Drawing.Point(4, 22);
-            this.tpStats.Name = "tpStats";
-            this.tpStats.Padding = new System.Windows.Forms.Padding(3);
-            this.tpStats.Size = new System.Drawing.Size(673, 425);
-            this.tpStats.TabIndex = 3;
-            this.tpStats.Text = "Stats";
-            this.tpStats.UseVisualStyleBackColor = true;
+            this.tabStats.Controls.Add(this.groupBox2);
+            this.tabStats.Controls.Add(this.groupBox10);
+            this.tabStats.Controls.Add(this.groupBox9);
+            this.tabStats.Controls.Add(this.groupBox1);
+            this.tabStats.Location = new System.Drawing.Point(4, 22);
+            this.tabStats.Name = "tabStats";
+            this.tabStats.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStats.Size = new System.Drawing.Size(673, 425);
+            this.tabStats.TabIndex = 3;
+            this.tabStats.Text = "Stats";
+            this.tabStats.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -415,6 +415,7 @@
             this.tbSetSimPorto.TabIndex = 2;
             this.tbSetSimPorto.Text = "Set";
             this.tbSetSimPorto.UseVisualStyleBackColor = true;
+            this.tbSetSimPorto.Click += new System.EventHandler(this.tbSetSimPorto_Click);
             // 
             // tbSimPortoEUR
             // 
@@ -944,7 +945,7 @@
             this.groupBox3.PerformLayout();
             this.gbTraderDllSettings.ResumeLayout(false);
             this.gbTraderDllSettings.PerformLayout();
-            this.tpStats.ResumeLayout(false);
+            this.tabStats.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -993,7 +994,7 @@
         private System.Windows.Forms.CheckBox cbTraderLive;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbTraderDllFilename;
-        private System.Windows.Forms.TabPage tpStats;
+        private System.Windows.Forms.TabPage tabStats;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label4;

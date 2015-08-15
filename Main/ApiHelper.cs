@@ -48,11 +48,13 @@ namespace Main.Api {
             _curPortfolio = getBalance();
         }
 
-        public virtual void sell(decimal volume) {
+        public virtual bool sell(decimal volume) {
             Logging.log("ORDERSELL: " + volume.ToString(), LogPrior.Importand);
+            return true;
         }
-        public virtual void buy(decimal volume) {
+        public virtual bool buy(decimal volume) {
             Logging.log("ORDERBUY: " + volume.ToString(), LogPrior.Importand);
+            return true;
         }
         public void log(string text) {
 

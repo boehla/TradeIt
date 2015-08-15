@@ -53,14 +53,14 @@
         '\"',
         '\'',
         '\''};
-            this.fctb.AutoScrollMinSize = new System.Drawing.Size(25, 15);
+            this.fctb.AutoScrollMinSize = new System.Drawing.Size(99, 42);
             this.fctb.BackBrush = null;
-            this.fctb.CharHeight = 15;
-            this.fctb.CharWidth = 7;
+            this.fctb.CharHeight = 14;
+            this.fctb.CharWidth = 8;
             this.fctb.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctb.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.fctb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctb.Font = new System.Drawing.Font("Consolas", 9.75F);
+            this.fctb.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fctb.IsReplaceMode = false;
             this.fctb.Location = new System.Drawing.Point(0, 0);
             this.fctb.Name = "fctb";
@@ -69,6 +69,7 @@
             this.fctb.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.fctb.Size = new System.Drawing.Size(483, 391);
             this.fctb.TabIndex = 5;
+            this.fctb.Text = "Test 1III\r\n123WWWWWW\r\n";
             this.fctb.Zoom = 100;
             // 
             // FastDebugForm

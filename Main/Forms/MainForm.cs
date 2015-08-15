@@ -124,7 +124,6 @@ namespace Main {
                 }
                 if (timercounter % 120 == 2) {
                     kh.refreshPortfolio();
-                    refreshPortfolio();
                 }
                 if (timercounter % 600 == 5) {
                     cm.saveToFile(Settings.getString(SettKeys.DATA_FILE));
@@ -139,6 +138,8 @@ namespace Main {
                     dgvDebugWatch.DataSource = Lib.Performance.getTable();
                 } else if (tabControl1.SelectedTab == tabHelp) {
                     refreshMemoryStats();
+                } else if (tabControl1.SelectedTab == tabStats) {
+                    refreshPortfolio();
                 }
                 if (Settings.HasChange) Settings.save();
                 
@@ -241,12 +242,18 @@ namespace Main {
 
 
         private void refreshPortfolio() {
-            lCurPortoBTC.Text = kh.Portfolio.btc.ToString("0.########");
-            lCurPortoEUR.Text = kh.Portfolio.eur.ToString("0.##");
+
+
+            lCurPortoBTC.Text = kh.Portfolio.btc.ToString(Lib.Const.NUMBER_FORMAT);
+            lCurPortoEUR.Text = kh.Portfolio.eur.ToString(Lib.Const.NUMBER_FORMAT);
             if (tr != null) {
-                lStartPortoBTC.Text = tr.StartPortfolio.btc.ToString("0.########");
-                lStartPortoEUR.Text = kh.Portfolio.eur.ToString("0.##");
+                lStartPortoBTC.Text = tr.StartPortfolio.btc.ToString(Lib.Const.NUMBER_FORMAT);
+                lStartPortoEUR.Text = tr.StartPortfolio.eur.ToString(Lib.Const.NUMBER_FORMAT);
+
+                lSimPortoBTC.Text = tr.SimulatePortfolio.btc.ToString(Lib.Const.NUMBER_FORMAT);
+                lSimPortoEUR.Text = tr.SimulatePortfolio.eur.ToString(Lib.Const.NUMBER_FORMAT);
             }
+
         }
 
         private void cbTraderLive_CheckedChanged(object sender, EventArgs e) {
@@ -443,6 +450,17 @@ namespace Main {
             if (sender != null && sender is TextBox) {
                 saveTextBox((TextBox)sender);
             }
+        }
+
+        private void tbSetSimPorto_Click(object sender, EventArgs e) {
+            if (tr != null) {
+                ApiPortfolio sim = new ApiPortfolio();
+                sim.btc = Lib.Converter.toDecimal(tbSimPortoBTC.Text);
+                sim.eur = Lib.Converter.toDecimal(tbSimPortoEUR.Text);
+                tr.SimulatePortfolio = sim;
+                refreshPortfolio();
+            }
+            
         }
     }
 }

@@ -61,7 +61,13 @@ namespace Main {
             get { return _startPortfolio; }
         }
         public ApiPortfolio Portfolio {
-            get { return _api.Portfolio; }
+            get {
+                if (live) return _api.Portfolio;
+                else {
+                    if(_simulatePortfolio == null) _simulatePortfolio = _api.Portfolio.clone();
+                    return _simulatePortfolio;
+                };
+            }
         }
         public ApiPortfolio SimulatePortfolio {
             get { return _simulatePortfolio; }
@@ -93,19 +99,43 @@ namespace Main {
 
         }
 
-        public void sellBtc(decimal vol) {
-            this.writeLog(string.Format("SELL {2} btc: {0}@{1}", vol, Data.Candle().value.Last, live? "live" : "simualte" ));
-            plotPoint("sell", CurDate, Data.Candle().value.Last, Color.Red);
+        public bool sellBtc(decimal vol) {
+            bool successfull = false;
             if (live) {
                 _api.sell(vol);
+                successfull = true;
+            } else {
+                successfull = simulateTrade(-vol);
             }
+            if (successfull) {
+                plotPoint("sell", CurDate, Data.Candle().value.Last, Color.Red);
+            }
+            this.writeLog(string.Format("SELL {3}{2} btc: {0} @ {1}", vol.ToString(Lib.Const.NUMBER_FORMAT), Data.Candle().value.Last, live ? "live" : "simualte", successfull ? "" : "ERROR "));
+            return successfull;
         }
-        public void buyBtc(decimal vol) {
-            this.writeLog(string.Format("BUY {2} btc: {0}@{1}", vol, Data.Candle().value.Last, live ? "live" : "simualte"));
-            plotPoint("buy", CurDate, Data.Candle().value.Last, Color.Green);
+        public bool buyBtc(decimal vol) {
+            bool successfull = false;
             if (live) {
                 _api.buy(vol);
+                successfull = true;
+            } else {
+                successfull = simulateTrade(vol);
             }
+            if (successfull) {
+                plotPoint("buy", CurDate, Data.Candle().value.Last, Color.Green);
+            }
+            this.writeLog(string.Format("BUY {2} btc: {0} @ {1}", vol.ToString(Lib.Const.NUMBER_FORMAT), Data.Candle().value.Last, live ? "live" : "simualte", successfull ? "" : "ERROR "));
+            return successfull;
+        }
+        private bool simulateTrade(decimal vol) {
+            decimal volEur = -vol * (decimal)Data.Candle().value.Last; // minus because, if buying btc + and money -
+            if (_simulatePortfolio.btc + vol < 0) return false;
+            if (_simulatePortfolio.eur + volEur < 0) return false;
+
+            _simulatePortfolio.btc += vol;
+            _simulatePortfolio.eur += volEur;
+
+            return true;
         }
         public void log(string text) {
             this.writeLog("TRADING: " + text);
@@ -152,7 +182,7 @@ namespace Main {
                     ser.XValueType = ChartValueType.DateTime;
                 }
                 if(isCandle) ser.BorderWidth = 2;
-                else ser.BorderWidth = 5;
+                else ser.BorderWidth = 2;
                 if (area > 0) ser.ChartArea = area.ToString();
                 MainForm.chartcont.Series.Add(ser);
                 if (isCandle) {
@@ -188,7 +218,7 @@ namespace Main {
                 ser = new Series(name);
                 ser.ChartType = SeriesChartType.Point;
                 ser.XValueType = ChartValueType.DateTime;
-                ser.MarkerSize = 20;
+                ser.MarkerSize = 10;
                 ser.MarkerStyle = MarkerStyle.Circle;
                 ser.Color = col;
                 MainForm.chartcont.Series.Add(ser);
