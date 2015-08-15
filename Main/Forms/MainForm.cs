@@ -23,6 +23,8 @@ namespace Main {
         public Trader tr;
         public static System.Windows.Forms.DataVisualization.Charting.Chart chartcont = null;
 
+        public bool disableEvents = false;
+
         public CandleInterval candleInter = CandleInterval._5m;
 
         public MainForm() {
@@ -79,10 +81,19 @@ namespace Main {
             candleInter = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
             if (candleInter <= 0) candleInter = CandleInterval._1h;
             nudMaxChartPoints.Value = Settings.getInt(SettKeys.MAX_CHART_POINTS);
-            tbApiDllPath.Text = Settings.getString(SettKeys.API_DLL_FILE);
-            tbTraderDllFilename.Text = Settings.getString(SettKeys.TRADER_DLL_FILE);
 
-            
+            foreach (string key in Settings.Data.Keys) {
+                if (key.StartsWith(Lib.Const.IDS.TEXTBOX)) {
+                    string tbname = key.Substring(Lib.Const.IDS.TEXTBOX.Length);
+                    Control[] tb = this.Controls.Find(tbname, true);
+                    foreach (Control item in tb) {
+                        disableEvents = true;
+                        item.Text = Lib.Converter.toString(Settings.Data[key]);
+                        disableEvents = false;
+                    }
+                    
+                }
+            }
         }
 
         private void bMainShowDebug_Click(object sender, EventArgs e) {
@@ -154,7 +165,6 @@ namespace Main {
                     Logging.log("FileNotFound: " + path, LogPrior.Warning);
                     return null;
                 }
-                Settings.set(SettKeys.TRADER_DLL_FILE, tbTraderDllFilename.Text);
                 Trader ret = null;
                 Assembly assembly = Assembly.Load(System.IO.File.ReadAllBytes(path));
 
@@ -380,7 +390,6 @@ namespace Main {
                 double xValue = chartcont.ChartAreas[0].AxisX.PixelPositionToValue(e.X);
                 double yValue = chartcont.ChartAreas[0].AxisY.PixelPositionToValue(e.Y);
 
-
                 double pX = chartcont.ChartAreas[0].CursorX.Position; //X Axis Coordinate of your mouse cursor
                 double pY = chartcont.ChartAreas[0].CursorY.Position; //Y Axis Coordinate of your mouse cursor
 
@@ -392,8 +401,6 @@ namespace Main {
         }
 
         private void bApiLoad_Click(object sender, EventArgs e) {
-            Settings.set(SettKeys.API_DLL_FILE, tbApiDllPath.Text);
-
             kh = loadApiFromDll(tbApiDllPath.Text);
         }
 
@@ -425,6 +432,16 @@ namespace Main {
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e) {
             if (tabControl1.SelectedTab == tabDetailSettings) {
                 dgvDetailSettings.DataSource = Settings.getDataTable();
+            }
+        }
+        private void saveTextBox(TextBox tb) {
+            Settings.set(Lib.Const.IDS.TEXTBOX + tb.Name, tb.Text);
+        }
+
+        private void textbox_TextChanged(object sender, EventArgs e) {
+            if (disableEvents) return;
+            if (sender != null && sender is TextBox) {
+                saveTextBox((TextBox)sender);
             }
         }
     }

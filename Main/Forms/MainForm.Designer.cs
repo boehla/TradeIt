@@ -50,6 +50,17 @@
             this.lStartPortoBTC = new System.Windows.Forms.Label();
             this.lStartPortoEUR = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.tbSetSimPorto = new System.Windows.Forms.Button();
+            this.tbSimPortoEUR = new System.Windows.Forms.TextBox();
+            this.tbSimPortoBTC = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.lSimPortoBTC = new System.Windows.Forms.Label();
+            this.lSimPortoEUR = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lCurPortoBTC = new System.Windows.Forms.Label();
@@ -104,6 +115,8 @@
             this.gbTraderDllSettings.SuspendLayout();
             this.tpStats.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabHelp.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -304,6 +317,7 @@
             this.tbTraderDllFilename.Name = "tbTraderDllFilename";
             this.tbTraderDllFilename.Size = new System.Drawing.Size(441, 20);
             this.tbTraderDllFilename.TabIndex = 3;
+            this.tbTraderDllFilename.TextChanged += new System.EventHandler(this.textbox_TextChanged);
             this.tbTraderDllFilename.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FilenameTextBoxMouseDoubleClick);
             // 
             // bReloadTrader
@@ -319,6 +333,8 @@
             // tpStats
             // 
             this.tpStats.Controls.Add(this.groupBox2);
+            this.tpStats.Controls.Add(this.groupBox10);
+            this.tpStats.Controls.Add(this.groupBox9);
             this.tpStats.Controls.Add(this.groupBox1);
             this.tpStats.Location = new System.Drawing.Point(4, 22);
             this.tpStats.Name = "tpStats";
@@ -376,6 +392,112 @@
             this.label7.Size = new System.Drawing.Size(31, 13);
             this.label7.TabIndex = 0;
             this.label7.Text = "BTC:";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.tbSetSimPorto);
+            this.groupBox10.Controls.Add(this.tbSimPortoEUR);
+            this.groupBox10.Controls.Add(this.tbSimPortoBTC);
+            this.groupBox10.Controls.Add(this.label12);
+            this.groupBox10.Controls.Add(this.label16);
+            this.groupBox10.Location = new System.Drawing.Point(214, 6);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(244, 77);
+            this.groupBox10.TabIndex = 0;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Simulate Portoflio";
+            // 
+            // tbSetSimPorto
+            // 
+            this.tbSetSimPorto.Location = new System.Drawing.Point(155, 19);
+            this.tbSetSimPorto.Name = "tbSetSimPorto";
+            this.tbSetSimPorto.Size = new System.Drawing.Size(83, 48);
+            this.tbSetSimPorto.TabIndex = 2;
+            this.tbSetSimPorto.Text = "Set";
+            this.tbSetSimPorto.UseVisualStyleBackColor = true;
+            // 
+            // tbSimPortoEUR
+            // 
+            this.tbSimPortoEUR.Location = new System.Drawing.Point(48, 47);
+            this.tbSimPortoEUR.Name = "tbSimPortoEUR";
+            this.tbSimPortoEUR.Size = new System.Drawing.Size(100, 20);
+            this.tbSimPortoEUR.TabIndex = 1;
+            this.tbSimPortoEUR.TextChanged += new System.EventHandler(this.textbox_TextChanged);
+            // 
+            // tbSimPortoBTC
+            // 
+            this.tbSimPortoBTC.Location = new System.Drawing.Point(48, 22);
+            this.tbSimPortoBTC.Name = "tbSimPortoBTC";
+            this.tbSimPortoBTC.Size = new System.Drawing.Size(100, 20);
+            this.tbSimPortoBTC.TabIndex = 1;
+            this.tbSimPortoBTC.TextChanged += new System.EventHandler(this.textbox_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(6, 50);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(33, 13);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "EUR:";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 25);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(31, 13);
+            this.label16.TabIndex = 0;
+            this.label16.Text = "BTC:";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label11);
+            this.groupBox9.Controls.Add(this.lSimPortoBTC);
+            this.groupBox9.Controls.Add(this.lSimPortoEUR);
+            this.groupBox9.Controls.Add(this.label14);
+            this.groupBox9.Location = new System.Drawing.Point(214, 159);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(202, 77);
+            this.groupBox9.TabIndex = 0;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Simulate Portoflio";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 50);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "EUR:";
+            // 
+            // lSimPortoBTC
+            // 
+            this.lSimPortoBTC.AutoSize = true;
+            this.lSimPortoBTC.Location = new System.Drawing.Point(45, 25);
+            this.lSimPortoBTC.Name = "lSimPortoBTC";
+            this.lSimPortoBTC.Size = new System.Drawing.Size(31, 13);
+            this.lSimPortoBTC.TabIndex = 0;
+            this.lSimPortoBTC.Text = "BTC:";
+            // 
+            // lSimPortoEUR
+            // 
+            this.lSimPortoEUR.AutoSize = true;
+            this.lSimPortoEUR.Location = new System.Drawing.Point(45, 50);
+            this.lSimPortoEUR.Name = "lSimPortoEUR";
+            this.lSimPortoEUR.Size = new System.Drawing.Size(31, 13);
+            this.lSimPortoEUR.TabIndex = 0;
+            this.lSimPortoEUR.Text = "BTC:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 25);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(31, 13);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "BTC:";
             // 
             // groupBox1
             // 
@@ -578,6 +700,7 @@
             this.tbApiDllPath.Name = "tbApiDllPath";
             this.tbApiDllPath.Size = new System.Drawing.Size(441, 20);
             this.tbApiDllPath.TabIndex = 3;
+            this.tbApiDllPath.TextChanged += new System.EventHandler(this.textbox_TextChanged);
             this.tbApiDllPath.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.FilenameTextBoxMouseDoubleClick);
             // 
             // bApiLoad
@@ -824,6 +947,10 @@
             this.tpStats.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabHelp.ResumeLayout(false);
@@ -921,6 +1048,17 @@
         private System.Windows.Forms.DataGridView dgvDetailSettings;
         private System.Windows.Forms.TextBox tbTraderStatus;
         private System.Windows.Forms.DataGridView dgvDebugWatch;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Button tbSetSimPorto;
+        private System.Windows.Forms.TextBox tbSimPortoEUR;
+        private System.Windows.Forms.TextBox tbSimPortoBTC;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lSimPortoBTC;
+        private System.Windows.Forms.Label lSimPortoEUR;
+        private System.Windows.Forms.Label label14;
     }
 }
 

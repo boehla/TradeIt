@@ -19,6 +19,9 @@ namespace Main {
         static public bool HasChange {
             get { return _hasChange; }
         }
+        static public Dictionary<string, object> Data {
+            get { return data; }
+        }
 
         static public int getInt(object key) {
             return Lib.Converter.toInt(get(key));
