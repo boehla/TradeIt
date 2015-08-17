@@ -34,17 +34,21 @@ namespace Main {
             }
         }
         public void addToAllNewTicker(ApiTicker tick, DateTime dt) {
+            Lib.Performance.setWatch("addallticks", true);
             if (dt < Lib.Const.NULL_DATE) {
                 Logging.log("Skip addToAllNewTicker because Date < NULL_DATE", LogPrior.Warning);
+                Lib.Performance.setWatch("addallticks", false);
                 return;
             } else if (!tick.CorrectData) {
                 Logging.log("Skip tick because correctData is not set true! " + tick.ToString(), LogPrior.Warning);
+                Lib.Performance.setWatch("addallticks", false);
                 return;
             }
             Logging.log("AddTickToAll: bid=" + tick.Bid + " ask=" + tick.Ask, LogPrior.Debug);
             foreach (KeyValuePair<int, CandleList> entry in candllist) {
                 entry.Value.AddTick(tick, dt);
             }
+            Lib.Performance.setWatch("addallticks", false);
         }
 
         public void saveToFile(string filename) {
@@ -191,6 +195,34 @@ namespace Main {
             Logging.log(String.Format("Import BitcoinAvarage Candledata finished ({0} candleListes and {1} candles)", candllist.Count, countcandles), LogPrior.Info);
             return true;
         }
+        public bool loadFromBitcoinChart(string filename, bool merge) {
+            if (!File.Exists(filename)) return false;
+            Logging.log("Start importing Bitcoinchart candledata from: " + filename, LogPrior.Debug);
+            int countcandles = 0;
+            StreamReader fin = new StreamReader(filename);
+            if (!merge || candllist.Count <= 0) {
+                this.generateNew();
+            }
+            Logging.setForceLogPrior(LogPrior.Warning);
+            while (!fin.EndOfStream) {
+                countcandles++;
+                string line = fin.ReadLine();
+                if (countcandles <= 1) continue;
+                string[] csvs = line.Split(',');
+                DateTime dt = Lib.Converter.toDateTime(csvs[0], DateTime.MinValue, "1970");
+                ApiTicker tick = new ApiTicker();
+
+                tick.Last = Lib.Converter.toDouble(csvs[1]);
+                tick.Volume = Lib.Converter.toDouble(csvs[2]);
+
+                tick.CorrectData = true;
+                this.addToAllNewTicker(tick, dt);
+            }
+            Logging.releaseForceLogPrior();
+            fin.Close();
+            Logging.log(String.Format("Import Bitcoinchart Candledata finished ({0} candleListes and {1} candles)", candllist.Count, countcandles), LogPrior.Info);
+            return true;
+        }
         public void archiveTick(ApiTicker tick) {
             string filename = string.Format("archiv\\ticks_{0:yyyyMM}.csv", DateTime.Now);
             string folder = Path.GetDirectoryName(filename);
@@ -263,8 +295,10 @@ namespace Main {
             }
         }
         private void checkCandleCount() {
+            Lib.Performance.setWatch("checkCandlecount", true);
             while (_candls.Count > MaxCandels) {
                 int ind = _candls.Count - 1;
+                /*
                 Logging.log(String.Format("Delete data! Candledate={0}", Lib.Converter.toString(_candls[ind].dt)), LogPrior.Warning);
                 try {
                     string filename = string.Format("archiv\\chandles_{0:MM_yyyy}.txt", DateTime.Now);
@@ -277,9 +311,10 @@ namespace Main {
                     fout.Close();
                 } catch (Exception ex) {
                     Logging.logException("Couldn't Export Candle ): ", ex);
-                }
+                }*/
                 _candls.RemoveAt(ind);
             }
+            Lib.Performance.setWatch("checkCandlecount", false);
         }
         public DateTime getIntDate(DateTime dt) {
             DateTime ret = _refDate;
