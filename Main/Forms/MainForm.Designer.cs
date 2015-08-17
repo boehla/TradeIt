@@ -105,6 +105,7 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.bitcoinchartcomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDebugWatch)).BeginInit();
@@ -864,7 +865,8 @@
             // 
             this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tradeItFileToolStripMenuItem,
-            this.bitcoinavaragecomToolStripMenuItem});
+            this.bitcoinavaragecomToolStripMenuItem,
+            this.bitcoinchartcomToolStripMenuItem});
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
             this.importToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.importToolStripMenuItem.Text = "Import";
@@ -920,6 +922,13 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // bitcoinchartcomToolStripMenuItem
+            // 
+            this.bitcoinchartcomToolStripMenuItem.Name = "bitcoinchartcomToolStripMenuItem";
+            this.bitcoinchartcomToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.bitcoinchartcomToolStripMenuItem.Text = "Bitcoinchart.com...";
+            this.bitcoinchartcomToolStripMenuItem.Click += new System.EventHandler(this.bitcoinchartcomToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1060,6 +1069,7 @@
         private System.Windows.Forms.Label lSimPortoBTC;
         private System.Windows.Forms.Label lSimPortoEUR;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ToolStripMenuItem bitcoinchartcomToolStripMenuItem;
     }
 }
 

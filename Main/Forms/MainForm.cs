@@ -314,6 +314,15 @@ namespace Main {
             }
         }
 
+        private void bitcoinchartcomToolStripMenuItem_Click(object sender, EventArgs e) {
+            string initFolderId = "FILEDIALOG_INIT_DATAFILE_BITCOINCHART";
+            string[] files = showFileDialog(initFolderId);
+            if (files == null || files.Length <= 0) return;
+            foreach (string file in files) {
+                cm.loadFromBitcoinChart(file, true);
+            }
+        }
+
         private string[] showFileDialog(string initFolderId) {
             string initFolder = Settings.getString(initFolderId);
             if(initFolder.Length > 0 && !Directory.Exists(initFolder)) initFolder = "";
