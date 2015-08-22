@@ -19,6 +19,7 @@ namespace Lib {
             public const string CANDLE_LIST = "CLIST";
             public const string CANDLE_ITEM = "CITEM";
             public const string TEXTBOX = "textbox%";
+            public const string CHECKBOX = "checkbox%";
         }
     }
 }
