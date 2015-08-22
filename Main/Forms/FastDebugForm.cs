@@ -13,6 +13,7 @@ namespace TradeIt.Forms {
     public partial class FastDebugForm : Form {
         private int maxChars = 1000000;
         private int curLength = 0;
+        private bool scrollToEnd = true;
 
         TextStyle debugStyle = new TextStyle(Brushes.Black, null, FontStyle.Regular);
         TextStyle infoStyle = new TextStyle(Brushes.Green, null, FontStyle.Regular);
@@ -21,7 +22,7 @@ namespace TradeIt.Forms {
         TextStyle importandStyle = new TextStyle(Brushes.Blue, null, FontStyle.Regular);
         TextStyle traderStyle = new TextStyle(Brushes.DarkViolet, null, FontStyle.Bold);
 
-        DateTime lastLog = new DateTime(0);
+        DateTime lastLogAdded = new DateTime(0);
 
         public FastDebugForm() {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace TradeIt.Forms {
         }
         private void Log(string text, Style style) {
             //remember user selection
-            var userSelection = fctb.Selection.Clone();
+            
             //add text with predefined style
             fctb.TextSource.CurrentTB = fctb;
             if (curLength > maxChars) {
@@ -46,20 +47,13 @@ namespace TradeIt.Forms {
             curLength += text.Length;
             fctb.AppendText(text, style);
             //restore user selection
-            if (lastLog.AddSeconds(5) < DateTime.Now) {
 
-                if (!userSelection.IsEmpty || userSelection.Start.iLine < fctb.LinesCount - 2) {
-                    fctb.Selection.Start = userSelection.Start;
-                    fctb.Selection.End = userSelection.End;
-                } else {
-                    fctb.GoEnd();//scroll to end of the text
-                }
-            }
-            lastLog = DateTime.Now;
+            lastLogAdded = DateTime.Now;
         }
 
         private void btGotToEnd_Click(object sender, EventArgs e) {
             fctb.GoEnd();
+            scrollToEnd = true;
         }
 
         
@@ -99,5 +93,32 @@ namespace TradeIt.Forms {
             this.Hide();
             e.Cancel = true; // this cancels the close event.
         }
+
+        private void bClear_Click(object sender, EventArgs e) {
+            fctb.Clear();
+        }
+
+        private void tRefresh_Tick(object sender, EventArgs e) {
+            if (lastLogAdded > Lib.Const.NULL_DATE) {
+                var userSelection = fctb.Selection.Clone();
+
+                if (scrollToEnd) {
+                    fctb.GoEnd();//scroll to end of the text
+                }
+
+                lastLogAdded = new DateTime(0);
+            }
+        }
+
+        private void fctb_Scroll(object sender, ScrollEventArgs e) {
+            scrollToEnd = false;
+        }
+        /*
+        private void fctb_SelectionChanged(object sender, EventArgs e) {
+            var userSelection = fctb.Selection.Clone();
+            if (!userSelection.IsEmpty || userSelection.Start.iLine < fctb.LinesCount - 2) {
+                scrollToEnd = false;
+            } 
+        } */
     }
 }

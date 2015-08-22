@@ -26,15 +26,18 @@
             this.components = new System.ComponentModel.Container();
             this.btGotToEnd = new System.Windows.Forms.Button();
             this.fctb = new FastColoredTextBoxNS.FastColoredTextBox();
+            this.bClear = new System.Windows.Forms.Button();
+            this.tRefresh = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.fctb)).BeginInit();
             this.SuspendLayout();
             // 
             // btGotToEnd
             // 
-            this.btGotToEnd.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btGotToEnd.Location = new System.Drawing.Point(0, 391);
+            this.btGotToEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btGotToEnd.Location = new System.Drawing.Point(0, 392);
             this.btGotToEnd.Name = "btGotToEnd";
-            this.btGotToEnd.Size = new System.Drawing.Size(483, 23);
+            this.btGotToEnd.Size = new System.Drawing.Size(401, 25);
             this.btGotToEnd.TabIndex = 6;
             this.btGotToEnd.Text = "Go to end";
             this.btGotToEnd.UseVisualStyleBackColor = true;
@@ -42,6 +45,9 @@
             // 
             // fctb
             // 
+            this.fctb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.fctb.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
@@ -53,32 +59,48 @@
         '\"',
         '\'',
         '\''};
-            this.fctb.AutoScrollMinSize = new System.Drawing.Size(99, 42);
+            this.fctb.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.fctb.BackBrush = null;
             this.fctb.CharHeight = 14;
             this.fctb.CharWidth = 8;
             this.fctb.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctb.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctb.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fctb.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fctb.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.fctb.IsReplaceMode = false;
             this.fctb.Location = new System.Drawing.Point(0, 0);
             this.fctb.Name = "fctb";
             this.fctb.Paddings = new System.Windows.Forms.Padding(0);
             this.fctb.ReadOnly = true;
             this.fctb.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctb.Size = new System.Drawing.Size(483, 391);
+            this.fctb.Size = new System.Drawing.Size(483, 393);
             this.fctb.TabIndex = 5;
-            this.fctb.Text = "Test 1III\r\n123WWWWWW\r\n";
             this.fctb.Zoom = 100;
+            this.fctb.Scroll += new System.Windows.Forms.ScrollEventHandler(this.fctb_Scroll);
+            // 
+            // bClear
+            // 
+            this.bClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bClear.Location = new System.Drawing.Point(398, 392);
+            this.bClear.Name = "bClear";
+            this.bClear.Size = new System.Drawing.Size(85, 25);
+            this.bClear.TabIndex = 6;
+            this.bClear.Text = "Clear";
+            this.bClear.UseVisualStyleBackColor = true;
+            this.bClear.Click += new System.EventHandler(this.bClear_Click);
+            // 
+            // tRefresh
+            // 
+            this.tRefresh.Enabled = true;
+            this.tRefresh.Tick += new System.EventHandler(this.tRefresh_Tick);
             // 
             // FastDebugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 414);
-            this.Controls.Add(this.fctb);
+            this.Controls.Add(this.bClear);
             this.Controls.Add(this.btGotToEnd);
+            this.Controls.Add(this.fctb);
             this.Name = "FastDebugForm";
             this.Text = "LoggerSample";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FastDebugForm_FormClosing);
@@ -92,5 +114,7 @@
 
         private FastColoredTextBoxNS.FastColoredTextBox fctb;
         private System.Windows.Forms.Button btGotToEnd;
+        private System.Windows.Forms.Button bClear;
+        private System.Windows.Forms.Timer tRefresh;
     }
 }
