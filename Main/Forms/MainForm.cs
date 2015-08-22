@@ -77,6 +77,8 @@ namespace Main {
         }
 
         private void LoadSettings() {
+            disableEvents = true;
+
             cbCandleIntervall.SelectedItem = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
             candleInter = (CandleInterval)Settings.getInt(SettKeys.CANDLE_INTERVALL);
             if (candleInter <= 0) candleInter = CandleInterval._1h;
@@ -87,13 +89,32 @@ namespace Main {
                     string tbname = key.Substring(Lib.Const.IDS.TEXTBOX.Length);
                     Control[] tb = this.Controls.Find(tbname, true);
                     foreach (Control item in tb) {
-                        disableEvents = true;
+                        
                         item.Text = Lib.Converter.toString(Settings.Data[key]);
-                        disableEvents = false;
+                        
                     }
-                    
+
+                } else if (key.StartsWith(Lib.Const.IDS.CHECKBOX)) {
+                    string tbname = key.Substring(Lib.Const.IDS.CHECKBOX.Length);
+                    Control[] tb = this.Controls.Find(tbname, true);
+                    foreach (Control item in tb) {
+                        if (item is CheckBox) {
+                            ((CheckBox)item).Checked = Settings.getBool(key);
+                        }
+                    }
                 }
             }
+
+            if (cbAutoLoadTickerApi.Checked) {
+                bApiLoad_Click(null, null);
+            }
+            if (cbAutoLoadTrader.Checked) {
+                bReloadTrader_Click(null, null);
+            }
+            if (cbAutoLoadSimPorto.Checked) {
+                bSetSimPorto_Click(null, null);
+            }
+            disableEvents = false;
         }
 
         private void bMainShowDebug_Click(object sender, EventArgs e) {
@@ -453,6 +474,9 @@ namespace Main {
         private void saveTextBox(TextBox tb) {
             Settings.set(Lib.Const.IDS.TEXTBOX + tb.Name, tb.Text);
         }
+        private void saveCheckBox(CheckBox tb) {
+            Settings.set(Lib.Const.IDS.CHECKBOX + tb.Name, tb.Checked);
+        }
 
         private void textbox_TextChanged(object sender, EventArgs e) {
             if (disableEvents) return;
@@ -460,8 +484,14 @@ namespace Main {
                 saveTextBox((TextBox)sender);
             }
         }
+        private void checkBox_StateChanged(object sender, EventArgs e) {
+            if (disableEvents) return;
+            if (sender != null && sender is CheckBox) {
+                saveCheckBox((CheckBox)sender);
+            }
+        }
 
-        private void tbSetSimPorto_Click(object sender, EventArgs e) {
+        private void bSetSimPorto_Click(object sender, EventArgs e) {
             if (tr != null) {
                 ApiPortfolio sim = new ApiPortfolio();
                 sim.btc = Lib.Converter.toDecimal(tbSimPortoBTC.Text);
@@ -471,5 +501,6 @@ namespace Main {
             }
             
         }
+
     }
 }

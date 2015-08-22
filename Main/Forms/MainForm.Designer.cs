@@ -51,7 +51,7 @@
             this.lStartPortoEUR = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.tbSetSimPorto = new System.Windows.Forms.Button();
+            this.bSetSimPorto = new System.Windows.Forms.Button();
             this.tbSimPortoEUR = new System.Windows.Forms.TextBox();
             this.tbSimPortoBTC = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -98,6 +98,7 @@
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tradeItFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bitcoinavaragecomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bitcoinchartcomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.resetDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,7 +106,9 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.bitcoinchartcomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbAutoLoadTrader = new System.Windows.Forms.CheckBox();
+            this.cbAutoLoadTickerApi = new System.Windows.Forms.CheckBox();
+            this.cbAutoLoadSimPorto = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDebugWatch)).BeginInit();
@@ -293,6 +296,7 @@
             // 
             // gbTraderDllSettings
             // 
+            this.gbTraderDllSettings.Controls.Add(this.cbAutoLoadTrader);
             this.gbTraderDllSettings.Controls.Add(this.label1);
             this.gbTraderDllSettings.Controls.Add(this.tbTraderDllFilename);
             this.gbTraderDllSettings.Controls.Add(this.bReloadTrader);
@@ -396,7 +400,8 @@
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.tbSetSimPorto);
+            this.groupBox10.Controls.Add(this.cbAutoLoadSimPorto);
+            this.groupBox10.Controls.Add(this.bSetSimPorto);
             this.groupBox10.Controls.Add(this.tbSimPortoEUR);
             this.groupBox10.Controls.Add(this.tbSimPortoBTC);
             this.groupBox10.Controls.Add(this.label12);
@@ -408,15 +413,15 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Simulate Portoflio";
             // 
-            // tbSetSimPorto
+            // bSetSimPorto
             // 
-            this.tbSetSimPorto.Location = new System.Drawing.Point(155, 19);
-            this.tbSetSimPorto.Name = "tbSetSimPorto";
-            this.tbSetSimPorto.Size = new System.Drawing.Size(83, 48);
-            this.tbSetSimPorto.TabIndex = 2;
-            this.tbSetSimPorto.Text = "Set";
-            this.tbSetSimPorto.UseVisualStyleBackColor = true;
-            this.tbSetSimPorto.Click += new System.EventHandler(this.tbSetSimPorto_Click);
+            this.bSetSimPorto.Location = new System.Drawing.Point(155, 19);
+            this.bSetSimPorto.Name = "bSetSimPorto";
+            this.bSetSimPorto.Size = new System.Drawing.Size(83, 23);
+            this.bSetSimPorto.TabIndex = 2;
+            this.bSetSimPorto.Text = "Set";
+            this.bSetSimPorto.UseVisualStyleBackColor = true;
+            this.bSetSimPorto.Click += new System.EventHandler(this.bSetSimPorto_Click);
             // 
             // tbSimPortoEUR
             // 
@@ -677,6 +682,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.cbAutoLoadTickerApi);
             this.groupBox6.Controls.Add(this.label9);
             this.groupBox6.Controls.Add(this.tbApiDllPath);
             this.groupBox6.Controls.Add(this.bApiLoad);
@@ -885,6 +891,13 @@
             this.bitcoinavaragecomToolStripMenuItem.Text = "Bitcoinavarage.com...";
             this.bitcoinavaragecomToolStripMenuItem.Click += new System.EventHandler(this.bitcoinavaragecomToolStripMenuItem_Click);
             // 
+            // bitcoinchartcomToolStripMenuItem
+            // 
+            this.bitcoinchartcomToolStripMenuItem.Name = "bitcoinchartcomToolStripMenuItem";
+            this.bitcoinchartcomToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.bitcoinchartcomToolStripMenuItem.Text = "Bitcoinchart.com...";
+            this.bitcoinchartcomToolStripMenuItem.Click += new System.EventHandler(this.bitcoinchartcomToolStripMenuItem_Click);
+            // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
@@ -923,12 +936,38 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // bitcoinchartcomToolStripMenuItem
+            // cbAutoLoadTrader
             // 
-            this.bitcoinchartcomToolStripMenuItem.Name = "bitcoinchartcomToolStripMenuItem";
-            this.bitcoinchartcomToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.bitcoinchartcomToolStripMenuItem.Text = "Bitcoinchart.com...";
-            this.bitcoinchartcomToolStripMenuItem.Click += new System.EventHandler(this.bitcoinchartcomToolStripMenuItem_Click);
+            this.cbAutoLoadTrader.AutoSize = true;
+            this.cbAutoLoadTrader.Location = new System.Drawing.Point(288, 55);
+            this.cbAutoLoadTrader.Name = "cbAutoLoadTrader";
+            this.cbAutoLoadTrader.Size = new System.Drawing.Size(71, 17);
+            this.cbAutoLoadTrader.TabIndex = 5;
+            this.cbAutoLoadTrader.Text = "Auto load";
+            this.cbAutoLoadTrader.UseVisualStyleBackColor = true;
+            this.cbAutoLoadTrader.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
+            // 
+            // cbAutoLoadTickerApi
+            // 
+            this.cbAutoLoadTickerApi.AutoSize = true;
+            this.cbAutoLoadTickerApi.Location = new System.Drawing.Point(288, 55);
+            this.cbAutoLoadTickerApi.Name = "cbAutoLoadTickerApi";
+            this.cbAutoLoadTickerApi.Size = new System.Drawing.Size(71, 17);
+            this.cbAutoLoadTickerApi.TabIndex = 5;
+            this.cbAutoLoadTickerApi.Text = "Auto load";
+            this.cbAutoLoadTickerApi.UseVisualStyleBackColor = true;
+            this.cbAutoLoadTickerApi.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
+            // 
+            // cbAutoLoadSimPorto
+            // 
+            this.cbAutoLoadSimPorto.AutoSize = true;
+            this.cbAutoLoadSimPorto.Location = new System.Drawing.Point(154, 49);
+            this.cbAutoLoadSimPorto.Name = "cbAutoLoadSimPorto";
+            this.cbAutoLoadSimPorto.Size = new System.Drawing.Size(71, 17);
+            this.cbAutoLoadSimPorto.TabIndex = 5;
+            this.cbAutoLoadSimPorto.Text = "Auto load";
+            this.cbAutoLoadSimPorto.UseVisualStyleBackColor = true;
+            this.cbAutoLoadSimPorto.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
             // 
             // MainForm
             // 
@@ -1059,7 +1098,7 @@
         private System.Windows.Forms.TextBox tbTraderStatus;
         private System.Windows.Forms.DataGridView dgvDebugWatch;
         private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.Button tbSetSimPorto;
+        private System.Windows.Forms.Button bSetSimPorto;
         private System.Windows.Forms.TextBox tbSimPortoEUR;
         private System.Windows.Forms.TextBox tbSimPortoBTC;
         private System.Windows.Forms.Label label12;
@@ -1070,6 +1109,9 @@
         private System.Windows.Forms.Label lSimPortoEUR;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ToolStripMenuItem bitcoinchartcomToolStripMenuItem;
+        private System.Windows.Forms.CheckBox cbAutoLoadTrader;
+        private System.Windows.Forms.CheckBox cbAutoLoadSimPorto;
+        private System.Windows.Forms.CheckBox cbAutoLoadTickerApi;
     }
 }
 
