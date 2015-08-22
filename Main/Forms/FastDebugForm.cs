@@ -99,7 +99,7 @@ namespace TradeIt.Forms {
         }
 
         private void tRefresh_Tick(object sender, EventArgs e) {
-            if (lastLogAdded > Lib.Const.NULL_DATE) {
+            if (lastLogAdded > Lib.Const.NULL_DATE && this.Visible) {
                 var userSelection = fctb.Selection.Clone();
 
                 if (scrollToEnd) {
