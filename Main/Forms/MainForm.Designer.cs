@@ -27,6 +27,7 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.bMainShowDebug = new System.Windows.Forms.Button();
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -41,6 +42,7 @@
             this.cbTraderLive = new System.Windows.Forms.CheckBox();
             this.lTraderStatus = new System.Windows.Forms.Label();
             this.gbTraderDllSettings = new System.Windows.Forms.GroupBox();
+            this.cbAutoLoadTrader = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbTraderDllFilename = new System.Windows.Forms.TextBox();
             this.bReloadTrader = new System.Windows.Forms.Button();
@@ -51,6 +53,7 @@
             this.lStartPortoEUR = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.cbAutoLoadSimPorto = new System.Windows.Forms.CheckBox();
             this.bSetSimPorto = new System.Windows.Forms.Button();
             this.tbSimPortoEUR = new System.Windows.Forms.TextBox();
             this.tbSimPortoBTC = new System.Windows.Forms.TextBox();
@@ -79,6 +82,7 @@
             this.dgvTradeHistory = new System.Windows.Forms.DataGridView();
             this.tabApi = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.cbAutoLoadTickerApi = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
             this.tbApiDllPath = new System.Windows.Forms.TextBox();
             this.bApiLoad = new System.Windows.Forms.Button();
@@ -106,9 +110,8 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.cbAutoLoadTrader = new System.Windows.Forms.CheckBox();
-            this.cbAutoLoadTickerApi = new System.Windows.Forms.CheckBox();
-            this.cbAutoLoadSimPorto = new System.Windows.Forms.CheckBox();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDebugWatch)).BeginInit();
@@ -307,6 +310,17 @@
             this.gbTraderDllSettings.TabStop = false;
             this.gbTraderDllSettings.Text = "Dll Settings";
             // 
+            // cbAutoLoadTrader
+            // 
+            this.cbAutoLoadTrader.AutoSize = true;
+            this.cbAutoLoadTrader.Location = new System.Drawing.Point(288, 55);
+            this.cbAutoLoadTrader.Name = "cbAutoLoadTrader";
+            this.cbAutoLoadTrader.Size = new System.Drawing.Size(71, 17);
+            this.cbAutoLoadTrader.TabIndex = 5;
+            this.cbAutoLoadTrader.Text = "Auto load";
+            this.cbAutoLoadTrader.UseVisualStyleBackColor = true;
+            this.cbAutoLoadTrader.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -412,6 +426,17 @@
             this.groupBox10.TabIndex = 0;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Simulate Portoflio";
+            // 
+            // cbAutoLoadSimPorto
+            // 
+            this.cbAutoLoadSimPorto.AutoSize = true;
+            this.cbAutoLoadSimPorto.Location = new System.Drawing.Point(154, 49);
+            this.cbAutoLoadSimPorto.Name = "cbAutoLoadSimPorto";
+            this.cbAutoLoadSimPorto.Size = new System.Drawing.Size(71, 17);
+            this.cbAutoLoadSimPorto.TabIndex = 5;
+            this.cbAutoLoadSimPorto.Text = "Auto load";
+            this.cbAutoLoadSimPorto.UseVisualStyleBackColor = true;
+            this.cbAutoLoadSimPorto.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
             // 
             // bSetSimPorto
             // 
@@ -693,6 +718,17 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Dll Settings";
             // 
+            // cbAutoLoadTickerApi
+            // 
+            this.cbAutoLoadTickerApi.AutoSize = true;
+            this.cbAutoLoadTickerApi.Location = new System.Drawing.Point(288, 55);
+            this.cbAutoLoadTickerApi.Name = "cbAutoLoadTickerApi";
+            this.cbAutoLoadTickerApi.Size = new System.Drawing.Size(71, 17);
+            this.cbAutoLoadTickerApi.TabIndex = 5;
+            this.cbAutoLoadTickerApi.Text = "Auto load";
+            this.cbAutoLoadTickerApi.UseVisualStyleBackColor = true;
+            this.cbAutoLoadTickerApi.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -826,6 +862,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tssTraderInfo,
+            this.toolStripSplitButton1,
+            this.toolStripStatusLabel1,
             this.tssApiInfo});
             this.statusStrip1.Location = new System.Drawing.Point(0, 481);
             this.statusStrip1.Name = "statusStrip1";
@@ -936,38 +974,20 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // cbAutoLoadTrader
+            // toolStripSplitButton1
             // 
-            this.cbAutoLoadTrader.AutoSize = true;
-            this.cbAutoLoadTrader.Location = new System.Drawing.Point(288, 55);
-            this.cbAutoLoadTrader.Name = "cbAutoLoadTrader";
-            this.cbAutoLoadTrader.Size = new System.Drawing.Size(71, 17);
-            this.cbAutoLoadTrader.TabIndex = 5;
-            this.cbAutoLoadTrader.Text = "Auto load";
-            this.cbAutoLoadTrader.UseVisualStyleBackColor = true;
-            this.cbAutoLoadTrader.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 17);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
             // 
-            // cbAutoLoadTickerApi
+            // toolStripStatusLabel1
             // 
-            this.cbAutoLoadTickerApi.AutoSize = true;
-            this.cbAutoLoadTickerApi.Location = new System.Drawing.Point(288, 55);
-            this.cbAutoLoadTickerApi.Name = "cbAutoLoadTickerApi";
-            this.cbAutoLoadTickerApi.Size = new System.Drawing.Size(71, 17);
-            this.cbAutoLoadTickerApi.TabIndex = 5;
-            this.cbAutoLoadTickerApi.Text = "Auto load";
-            this.cbAutoLoadTickerApi.UseVisualStyleBackColor = true;
-            this.cbAutoLoadTickerApi.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
-            // 
-            // cbAutoLoadSimPorto
-            // 
-            this.cbAutoLoadSimPorto.AutoSize = true;
-            this.cbAutoLoadSimPorto.Location = new System.Drawing.Point(154, 49);
-            this.cbAutoLoadSimPorto.Name = "cbAutoLoadSimPorto";
-            this.cbAutoLoadSimPorto.Size = new System.Drawing.Size(71, 17);
-            this.cbAutoLoadSimPorto.TabIndex = 5;
-            this.cbAutoLoadSimPorto.Text = "Auto load";
-            this.cbAutoLoadSimPorto.UseVisualStyleBackColor = true;
-            this.cbAutoLoadSimPorto.CheckedChanged += new System.EventHandler(this.checkBox_StateChanged);
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Text = "|";
             // 
             // MainForm
             // 
@@ -1112,6 +1132,8 @@
         private System.Windows.Forms.CheckBox cbAutoLoadTrader;
         private System.Windows.Forms.CheckBox cbAutoLoadSimPorto;
         private System.Windows.Forms.CheckBox cbAutoLoadTickerApi;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
     }
 }
 
