@@ -13,7 +13,7 @@ HowTo:
 
 Features:
 * Fast backtesting
-** Tested with 7,5 millions ticks, about 3 Years, tickinterval 5min, every 5min one simualted trade -> take about 1min
+  * Tested with 7,5 millions ticks, about 3 Years, tickinterval 5min, every 5min one simualted trade -> take about 1min
 
 Coming Soon:
 * -
