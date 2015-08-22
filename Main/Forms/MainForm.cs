@@ -502,5 +502,9 @@ namespace Main {
             
         }
 
+        private void bResetWatches_Click(object sender, EventArgs e) {
+            Lib.Performance.resetWatches();
+        }
+
     }
 }

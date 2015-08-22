@@ -24,9 +24,9 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.bMainShowDebug = new System.Windows.Forms.Button();
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
@@ -112,6 +112,7 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.bResetWatches = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDebugWatch)).BeginInit();
@@ -146,7 +147,7 @@
             // 
             this.bMainShowDebug.Location = new System.Drawing.Point(6, 6);
             this.bMainShowDebug.Name = "bMainShowDebug";
-            this.bMainShowDebug.Size = new System.Drawing.Size(109, 23);
+            this.bMainShowDebug.Size = new System.Drawing.Size(147, 23);
             this.bMainShowDebug.TabIndex = 0;
             this.bMainShowDebug.Text = "Show Debug";
             this.bMainShowDebug.UseVisualStyleBackColor = true;
@@ -182,6 +183,7 @@
             // tabDebug
             // 
             this.tabDebug.Controls.Add(this.dgvDebugWatch);
+            this.tabDebug.Controls.Add(this.bResetWatches);
             this.tabDebug.Controls.Add(this.bMainShowDebug);
             this.tabDebug.Location = new System.Drawing.Point(4, 22);
             this.tabDebug.Name = "tabDebug";
@@ -228,17 +230,17 @@
             // 
             // chartControl
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartControl.ChartAreas.Add(chartArea1);
+            chartArea2.Name = "ChartArea1";
+            this.chartControl.ChartAreas.Add(chartArea2);
             this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartControl.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.chartControl.Legends.Add(legend2);
             this.chartControl.Location = new System.Drawing.Point(3, 3);
             this.chartControl.Name = "chartControl";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartControl.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartControl.Series.Add(series2);
             this.chartControl.Size = new System.Drawing.Size(667, 419);
             this.chartControl.TabIndex = 0;
             this.chartControl.Text = "chart1";
@@ -989,6 +991,17 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
             this.toolStripStatusLabel1.Text = "|";
             // 
+            // bResetWatches
+            // 
+            this.bResetWatches.Location = new System.Drawing.Point(159, 6);
+            this.bResetWatches.Name = "bResetWatches";
+            this.bResetWatches.Size = new System.Drawing.Size(93, 23);
+            this.bResetWatches.TabIndex = 0;
+            this.bResetWatches.Text = "Reset Watches";
+            this.bResetWatches.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bResetWatches.UseVisualStyleBackColor = true;
+            this.bResetWatches.Click += new System.EventHandler(this.bResetWatches_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1134,6 +1147,7 @@
         private System.Windows.Forms.CheckBox cbAutoLoadTickerApi;
         private System.Windows.Forms.ToolStripStatusLabel toolStripSplitButton1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button bResetWatches;
     }
 }
 
