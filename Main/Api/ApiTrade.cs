@@ -18,6 +18,10 @@ namespace Main.Api {
         public decimal margin { get; set; }
         public string misc { get; set; }
 
+        public DateTime LocalTime {
+            get { return time.ToLocalTime(); }
+        }
+
         public ApiTrade() {
             ordertxid = "";
             pair = "";
@@ -48,6 +52,7 @@ namespace Main.Api {
             dt.Columns.Add("ordertxid");
             dt.Columns.Add("pair");
             dt.Columns.Add("time", DateTime.Now.GetType());
+            dt.Columns.Add("localtime", DateTime.Now.GetType());
             dt.Columns.Add("type");
             dt.Columns.Add("price");
             dt.Columns.Add("cost");
@@ -61,6 +66,7 @@ namespace Main.Api {
                 dr["ordertxid"] = Lib.Converter.toString(trade.ordertxid);
                 dr["pair"] = Lib.Converter.toString(trade.pair);
                 dr["time"] = trade.time;
+                dr["localtime"] = trade.LocalTime;
                 dr["type"] = Lib.Converter.toString(trade.type);
                 dr["price"] = Lib.Converter.toString(trade.price);
                 dr["cost"] = Lib.Converter.toString(trade.cost);
