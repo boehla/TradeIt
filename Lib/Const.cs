@@ -14,6 +14,7 @@ namespace Lib {
         static public char CSV_DEL = ';';
         static public DateTime NULL_DATE = new DateTime(10);
         static public DateTime ORIGN_DATE = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+        static public TimeSpan DAY = new TimeSpan(24, 0, 0);
 
         public class IDS {
             public const string CANDLE_LIST = "CLIST";
