@@ -360,6 +360,7 @@ namespace Main {
             cm.generateNew();
             chartControl.Series.Clear();
             cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
+            if (tr != null) tr.Initiale();
         }
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e) {
