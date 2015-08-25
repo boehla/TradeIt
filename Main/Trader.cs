@@ -102,8 +102,7 @@ namespace Main {
         public bool sellBtc(decimal vol) {
             bool successfull = false;
             if (live) {
-                _api.sell(vol);
-                successfull = true;
+                successfull = _api.sell(vol);
             } else {
                 successfull = simulateTrade(-vol);
             }
@@ -116,8 +115,7 @@ namespace Main {
         public bool buyBtc(decimal vol) {
             bool successfull = false;
             if (live) {
-                _api.buy(vol);
-                successfull = true;
+                successfull = _api.buy(vol);
             } else {
                 successfull = simulateTrade(vol);
             }
