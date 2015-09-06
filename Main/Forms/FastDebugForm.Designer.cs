@@ -35,7 +35,7 @@
             // 
             this.btGotToEnd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btGotToEnd.Location = new System.Drawing.Point(0, 392);
+            this.btGotToEnd.Location = new System.Drawing.Point(0, 403);
             this.btGotToEnd.Name = "btGotToEnd";
             this.btGotToEnd.Size = new System.Drawing.Size(401, 25);
             this.btGotToEnd.TabIndex = 6;
@@ -59,20 +59,20 @@
         '\"',
         '\'',
         '\''};
-            this.fctb.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.fctb.AutoScrollMinSize = new System.Drawing.Size(25, 12);
             this.fctb.BackBrush = null;
-            this.fctb.CharHeight = 14;
-            this.fctb.CharWidth = 8;
+            this.fctb.CharHeight = 12;
+            this.fctb.CharWidth = 7;
             this.fctb.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.fctb.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.fctb.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.fctb.Font = new System.Drawing.Font("Courier New", 8.25F);
             this.fctb.IsReplaceMode = false;
             this.fctb.Location = new System.Drawing.Point(0, 0);
             this.fctb.Name = "fctb";
             this.fctb.Paddings = new System.Windows.Forms.Padding(0);
             this.fctb.ReadOnly = true;
             this.fctb.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.fctb.Size = new System.Drawing.Size(483, 393);
+            this.fctb.Size = new System.Drawing.Size(483, 404);
             this.fctb.TabIndex = 5;
             this.fctb.Zoom = 100;
             this.fctb.Scroll += new System.Windows.Forms.ScrollEventHandler(this.fctb_Scroll);
@@ -80,7 +80,7 @@
             // bClear
             // 
             this.bClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.bClear.Location = new System.Drawing.Point(398, 392);
+            this.bClear.Location = new System.Drawing.Point(398, 403);
             this.bClear.Name = "bClear";
             this.bClear.Size = new System.Drawing.Size(85, 25);
             this.bClear.TabIndex = 6;
@@ -97,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(483, 414);
+            this.ClientSize = new System.Drawing.Size(483, 427);
             this.Controls.Add(this.bClear);
             this.Controls.Add(this.btGotToEnd);
             this.Controls.Add(this.fctb);

@@ -86,7 +86,7 @@ namespace TradeIt.Forms {
         }
 
         private void FastDebugForm_Load(object sender, EventArgs e) {
-
+           
         }
 
         private void FastDebugForm_FormClosing(object sender, FormClosingEventArgs e) {
