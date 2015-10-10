@@ -49,7 +49,7 @@ namespace Main {
         private void MainForm_Load(object sender, EventArgs e) {
             cm.generateNew();
             //cm.generateNew();
-            cm.loadFromFile("data\\backup.data", false);
+            
 
             //tr = loadTraderFromDll(Settings.getString(SettKeys.TRADER_DLL_FILE));
             //if (tr != null) tr.Initiale();
@@ -60,8 +60,9 @@ namespace Main {
             }
 
             LoadSettings();
+            cm.loadFromFile("data\\backup.data", false);
 
-            cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
+            cm.CandleList[(int)candleInter].setCandleEventHandler(new NewCandleEventHandler(OnNewCandleReceived));
             //cm.loadFromFile(@"data\backup.data", true);
 
             //cm.loadFromBitcoinAvarage(@"C:\New folder\bitavaM.csv", true);
@@ -93,7 +94,7 @@ namespace Main {
                         item.Text = Lib.Converter.toString(Settings.Data[key]);
                         
                     }
-
+                    
                 } else if (key.StartsWith(Lib.Const.IDS.CHECKBOX)) {
                     string tbname = key.Substring(Lib.Const.IDS.CHECKBOX.Length);
                     Control[] tb = this.Controls.Find(tbname, true);
@@ -243,7 +244,7 @@ namespace Main {
             if (tr != null) tr.Initiale();
 
             cm.generateNew();
-            cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
+            cm.CandleList[(int)candleInter].setCandleEventHandler(new NewCandleEventHandler(OnNewCandleReceived));
             //cm.loadFromFile(@"data\backup.data", false);
         }
         #endregion
@@ -359,7 +360,7 @@ namespace Main {
         private void resetDatabaseToolStripMenuItem_Click(object sender, EventArgs e) {
             cm.generateNew();
             chartControl.Series.Clear();
-            cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
+            cm.CandleList[(int)candleInter].setCandleEventHandler( new NewCandleEventHandler(OnNewCandleReceived));
             if (tr != null) tr.Initiale();
         }
 
@@ -445,10 +446,9 @@ namespace Main {
 
         private void changeCandleIntervall(CandleInterval newintervall) {
             if (newintervall == candleInter) return;
-            cm.CandleList[(int)candleInter].OnNewCandle -= new NewCandleEventHandler(OnNewCandleReceived);
             candleInter = newintervall;
             if (tr != null) tr.init(kh, candleInter, cm);
-            cm.CandleList[(int)candleInter].OnNewCandle += new NewCandleEventHandler(OnNewCandleReceived);
+            cm.CandleList[(int)candleInter].setCandleEventHandler(new NewCandleEventHandler(OnNewCandleReceived));
             Settings.set(SettKeys.CANDLE_INTERVALL, (int)candleInter);
         }
 

@@ -244,11 +244,17 @@ namespace Main {
         private Candle _lastCandle = null;
         private Candle _lastTick = null;
 
-        public event NewCandleEventHandler OnNewCandle;
+        private event NewCandleEventHandler onNewCandleHandler = delegate { };
         public Candle LastTick {
             get { return _lastTick; }
         }
-
+        public void setCandleEventHandler(NewCandleEventHandler ha) {
+            foreach(Delegate d in onNewCandleHandler.GetInvocationList())
+            {
+                onNewCandleHandler -= (NewCandleEventHandler)d;
+            }
+            onNewCandleHandler += ha;
+        }
 
         public int MaxCandels { get; set; }
         public TimeSpan Intervall {
@@ -342,9 +348,9 @@ namespace Main {
         }
         private void onNewCandle(Candle candle) {
 
-            if (this.OnNewCandle == null || candle == null) return;
+            if (candle == null) return;
             NewCandleArgs args = new NewCandleArgs(candle);
-            OnNewCandle(this, args);
+            onNewCandleHandler(this, args);
         }
 
     }
