@@ -135,8 +135,22 @@ namespace Main {
                 if (timercounter % 60 == 0 || timercounter % 60 == tryagain) {
                     try {
                         ApiTicker tp = kh.getTicker("XXBTZEUR");
-                        cm.archiveTick(tp);
-                        cm.addToAllNewTicker(tp, DateTime.Now);
+                        if (tp == null) {
+                            List<ApiTrade> trds = kh.getRecentTrades("XXBTZEUR");
+                            if (trds != null) {
+                                foreach (ApiTrade tr in trds) {
+                                    ApiTicker tick = new ApiTicker();
+                                    tick.Last = (double)tr.price;
+                                    tick.Volume = (double)tr.vol;
+                                    tick.NumberOfTrades = 1;
+                                    cm.archiveTick(tick);
+                                    cm.addToAllNewTicker(tick, DateTime.Now);
+                                }
+                            }
+                        } else {
+                            cm.archiveTick(tp);
+                            cm.addToAllNewTicker(tp, DateTime.Now);
+                        }
                         tryagain = -1;
                     } catch (Exception ex) {
                         Logging.logException("Failed to getTicker:", ex);
@@ -224,7 +238,7 @@ namespace Main {
                     if (type.BaseType.Name == "ApiHelp") {
                         ret = (ApiHelp)Activator.CreateInstance(type);
                         ret.init();
-                        tssApiInfo.Text = ret.Name;
+                        tssApiInfo.Text = ret.Name + " (V:" + ret.Version + ")";
                         return ret;
 
                     }

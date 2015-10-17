@@ -94,12 +94,19 @@ namespace Lib
         }
         static public DateTime toDateTime(Object ob, DateTime defValue, String format){
             if (ob == null) return defValue;
+            if (ob is DateTime) return (DateTime)ob;
             string strval = toString(ob);
             DateTime retvalue = defValue;
             if (format.ToLower().Equals("1970")) return Const.ORIGN_DATE.AddMilliseconds(Lib.Converter.toDouble(strval) * 1000);
             if (DateTime.TryParseExact(strval, format, Const.INV_CULTURE, DateTimeStyles.None, out retvalue)) return retvalue;
             if (DateTime.TryParse(strval, Const.INV_CULTURE, DateTimeStyles.None, out retvalue)) return retvalue;
             return defValue;
+        }
+        static public long toUnixTimeStamp(Object ob) {
+            DateTime dt = toDateTime(ob);
+            long timeSpan = (long)(dt - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
+            if (timeSpan < 0) timeSpan = 0;
+            return timeSpan;
         }
     }
     public class Tools {

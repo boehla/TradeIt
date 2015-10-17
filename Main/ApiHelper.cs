@@ -39,7 +39,12 @@ namespace Main.Api {
         public virtual ApiTradeHistory getTrades() {
             return new ApiTradeHistory();
         }
-
+        public List<ApiTrade> getRecentTrades(string pair) {
+            return this.getRecentTrades(new List<string>(){pair});
+        }
+        public virtual List<ApiTrade> getRecentTrades(List<string> pair) {
+            return new List<ApiTrade>();
+        }
 
         public virtual ApiPortfolio getBalance() {
             return new ApiPortfolio();
@@ -58,6 +63,13 @@ namespace Main.Api {
         }
         public void log(string text) {
 
+        }
+
+        public string loadSettings() {
+            return Settings.getString(SettKeys.API_TICKER_SETTINGS);
+        }
+        public void saveSettings(string value) {
+            Settings.set(SettKeys.API_TICKER_SETTINGS, value);
         }
     }
 
