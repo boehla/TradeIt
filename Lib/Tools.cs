@@ -24,12 +24,16 @@ namespace Lib
     public class Converter
     {
         static public string toString(Object ob) {
+            return toString(ob, "");
+        }
+        static public string toString(Object ob, string format) {
             if (ob == null) return "";
-            if (ob is DateTime) {
-                DateTime dt = (DateTime)ob;
-                return dt.ToString(Const.DATE_TIME_FORMAT);
+            if (format == null) format = "";
+            if (format.Length <= 0) {
+                if(ob is DateTime) format = Const.DATE_TIME_FORMAT;
+                if (ob is double || ob is float || ob is decimal) format = Const.NUMBER_FORMAT;
             }
-            return String.Format(CultureInfo.InvariantCulture, "{0}", ob);
+            return String.Format(CultureInfo.InvariantCulture, "{0:" + format + "}", ob);
         }
         static public bool toBool(Object ob) {
             return toBool(ob, false);
@@ -81,7 +85,7 @@ namespace Lib
         }
         static public decimal toDecimal(Object ob, decimal defValue) {
             if (ob == null) return defValue;
-            string strval = ob.ToString();
+            string strval = toString(ob);
             decimal retvalue = defValue;
             if (decimal.TryParse(strval, System.Globalization.NumberStyles.Any, Const.INV_CULTURE, out retvalue)) return retvalue;
             return defValue;
