@@ -15,7 +15,7 @@ using TradeIt.Forms;
 
 namespace Main {
     public partial class MainForm : Form {
-        public const string MAINVERSION = "0.1.1";
+        public const string MAINVERSION = "0.1.2";
 
         public static FastDebugForm df = null;
         public Api.ApiHelp kh = new ApiHelp();
@@ -288,8 +288,12 @@ namespace Main {
 
                 lSimPortoBTC.Text = tr.SimulatePortfolio.btc.ToString(Lib.Const.NUMBER_FORMAT);
                 lSimPortoEUR.Text = tr.SimulatePortfolio.eur.ToString(Lib.Const.NUMBER_FORMAT);
-            }
 
+                ApiPortfolio tot = kh.Portfolio.getTotalPorto(Lib.Converter.toDecimal(cm.getLastTicker().value.Last));
+                lTotalBTC.Text = Lib.Converter.toString(tot.btc);
+                lTotalEUR.Text = Lib.Converter.toString(tot.eur); 
+            }
+            
         }
 
         private void cbTraderLive_CheckedChanged(object sender, EventArgs e) {

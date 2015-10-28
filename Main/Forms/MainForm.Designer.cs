@@ -24,15 +24,16 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.bMainShowDebug = new System.Windows.Forms.Button();
             this.TickTimer = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabDebug = new System.Windows.Forms.TabPage();
             this.dgvDebugWatch = new System.Windows.Forms.DataGridView();
+            this.bResetWatches = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lChartPosition = new System.Windows.Forms.Label();
             this.chartControl = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -96,6 +97,8 @@
             this.dgvDetailSettings = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tssTraderInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssApiInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,9 +113,11 @@
             this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.bResetWatches = new System.Windows.Forms.Button();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lTotalBTC = new System.Windows.Forms.Label();
+            this.lTotalEUR = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDebugWatch)).BeginInit();
@@ -141,6 +146,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetailSettings)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.SuspendLayout();
             // 
             // bMainShowDebug
@@ -206,6 +212,17 @@
             this.dgvDebugWatch.Size = new System.Drawing.Size(661, 384);
             this.dgvDebugWatch.TabIndex = 1;
             // 
+            // bResetWatches
+            // 
+            this.bResetWatches.Location = new System.Drawing.Point(159, 6);
+            this.bResetWatches.Name = "bResetWatches";
+            this.bResetWatches.Size = new System.Drawing.Size(93, 23);
+            this.bResetWatches.TabIndex = 0;
+            this.bResetWatches.Text = "Reset Watches";
+            this.bResetWatches.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.bResetWatches.UseVisualStyleBackColor = true;
+            this.bResetWatches.Click += new System.EventHandler(this.bResetWatches_Click);
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.lChartPosition);
@@ -230,17 +247,17 @@
             // 
             // chartControl
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartControl.ChartAreas.Add(chartArea2);
+            chartArea1.Name = "ChartArea1";
+            this.chartControl.ChartAreas.Add(chartArea1);
             this.chartControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartControl.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chartControl.Legends.Add(legend1);
             this.chartControl.Location = new System.Drawing.Point(3, 3);
             this.chartControl.Name = "chartControl";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartControl.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartControl.Series.Add(series1);
             this.chartControl.Size = new System.Drawing.Size(667, 419);
             this.chartControl.TabIndex = 0;
             this.chartControl.Text = "chart1";
@@ -353,6 +370,7 @@
             // 
             // tabStats
             // 
+            this.tabStats.Controls.Add(this.groupBox11);
             this.tabStats.Controls.Add(this.groupBox2);
             this.tabStats.Controls.Add(this.groupBox10);
             this.tabStats.Controls.Add(this.groupBox9);
@@ -371,7 +389,7 @@
             this.groupBox2.Controls.Add(this.lStartPortoBTC);
             this.groupBox2.Controls.Add(this.lStartPortoEUR);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(6, 89);
+            this.groupBox2.Location = new System.Drawing.Point(6, 172);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(202, 77);
             this.groupBox2.TabIndex = 0;
@@ -879,6 +897,21 @@
             this.tssTraderInfo.Size = new System.Drawing.Size(61, 17);
             this.tssTraderInfo.Text = "TraderInfo";
             // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
+            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
+            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 17);
+            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Text = "|";
+            // 
             // tssApiInfo
             // 
             this.tssApiInfo.Name = "tssApiInfo";
@@ -976,31 +1009,54 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // toolStripSplitButton1
+            // groupBox11
             // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.None;
-            this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
-            this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(0, 17);
-            this.toolStripSplitButton1.Text = "toolStripSplitButton1";
+            this.groupBox11.Controls.Add(this.label13);
+            this.groupBox11.Controls.Add(this.lTotalBTC);
+            this.groupBox11.Controls.Add(this.lTotalEUR);
+            this.groupBox11.Controls.Add(this.label18);
+            this.groupBox11.Location = new System.Drawing.Point(6, 89);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(202, 77);
+            this.groupBox11.TabIndex = 0;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Total Portfolio";
             // 
-            // toolStripStatusLabel1
+            // label13
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel1.Text = "|";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 50);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(33, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "EUR:";
             // 
-            // bResetWatches
+            // lTotalBTC
             // 
-            this.bResetWatches.Location = new System.Drawing.Point(159, 6);
-            this.bResetWatches.Name = "bResetWatches";
-            this.bResetWatches.Size = new System.Drawing.Size(93, 23);
-            this.bResetWatches.TabIndex = 0;
-            this.bResetWatches.Text = "Reset Watches";
-            this.bResetWatches.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.bResetWatches.UseVisualStyleBackColor = true;
-            this.bResetWatches.Click += new System.EventHandler(this.bResetWatches_Click);
+            this.lTotalBTC.AutoSize = true;
+            this.lTotalBTC.Location = new System.Drawing.Point(45, 25);
+            this.lTotalBTC.Name = "lTotalBTC";
+            this.lTotalBTC.Size = new System.Drawing.Size(31, 13);
+            this.lTotalBTC.TabIndex = 0;
+            this.lTotalBTC.Text = "BTC:";
+            // 
+            // lTotalEUR
+            // 
+            this.lTotalEUR.AutoSize = true;
+            this.lTotalEUR.Location = new System.Drawing.Point(45, 50);
+            this.lTotalEUR.Name = "lTotalEUR";
+            this.lTotalEUR.Size = new System.Drawing.Size(31, 13);
+            this.lTotalEUR.TabIndex = 0;
+            this.lTotalEUR.Text = "BTC:";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(6, 25);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(31, 13);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "BTC:";
             // 
             // MainForm
             // 
@@ -1056,6 +1112,8 @@
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1148,6 +1206,11 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripSplitButton1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Button bResetWatches;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lTotalBTC;
+        private System.Windows.Forms.Label lTotalEUR;
+        private System.Windows.Forms.Label label18;
     }
 }
 

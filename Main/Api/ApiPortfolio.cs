@@ -22,5 +22,11 @@ namespace Main.Api{
             ret.btc = this.btc;
             return ret;
         }
+        public ApiPortfolio getTotalPorto(decimal price) {
+            ApiPortfolio ret = new ApiPortfolio();
+            ret.eur = this.eur + (this.btc * price);
+            ret.btc = (this.eur / price) + this.btc;
+            return ret;
+        }
     }
 }

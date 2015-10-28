@@ -19,7 +19,13 @@ namespace Main {
 
         }
 
-
+        public Candle getLastTicker() {
+            Candle ret = null;
+            foreach (KeyValuePair<int, CandleList> entry in candllist) {
+                if (ret == null || ret.dt < entry.Value.LastTick.dt) ret = entry.Value.LastTick;
+            }
+            return ret;
+        }
 
         public Dictionary<int, CandleList> CandleList {
             get { return candllist; }
